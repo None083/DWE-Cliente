@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <p id="mytxt">Aprende JavaScript con MyFPSchool!</p>
+    <button type="button" onclick="myFunction()">¡Dale!</button>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("mytxt");
+            x.style.fontSize = "25px";
+            x.style.color = "red";
+            console.log("Le acabo de cambiar el aspecto");
+            document.write("<h2>Buenos días</h2>");
+        }
+    </script>
+    <p id="parrafito"></p>
+    <script>
+        document.getElementById("parrafito").innerHTML = 5 + 6;
+    </script>
+    <script>
+        window.alert("BUENAS NOCHES");
+    </script>
+</body>
+
+</html>

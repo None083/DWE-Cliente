@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejer 3</title>
+</head>
+
+<body>
+    <h1>Test 7 preguntas</h1>
+
+    <p id="mytxt1" class="true">1. Pregunta verdadera</p>
+    <button class="verdadero" type="button" onclick="myFunction('mytxt1', true)">Verdadero</button>
+    <button class="falso" type="button" onclick="myFunction('mytxt1', false)">Falso</button>
+
+    <p id="mytxt2" class="true">2. Pregunta verdadera</p>
+    <button class="verdadero" type="button" onclick="myFunction('mytxt2', true)">Verdadero</button>
+    <button class="falso" type="button" onclick="myFunction('mytxt2', false)">Falso</button>
+
+    <p id="mytxt3" class="false">3. Pregunta falsa</p>
+    <button class="verdadero" type="button" onclick="myFunction('mytxt3', true)">Verdadero</button>
+    <button class="falso" type="button" onclick="myFunction('mytxt3', false)">Falso</button>
+
+    <p id="mytxt4" class="false">4. Pregunta falsa</p>
+    <button class="verdadero" type="button" onclick="myFunction('mytxt4', true)">Verdadero</button>
+    <button class="falso" type="button" onclick="myFunction('mytxt4', false)">Falso</button>
+
+    <p id="mytxt5" class="true">5. Pregunta verdadera</p>
+    <button class="verdadero" type="button" onclick="myFunction('mytxt5', true)">Verdadero</button>
+    <button class="falso" type="button" onclick="myFunction('mytxt5', false)">Falso</button>
+
+    <p id="mytxt6" class="false">6. Pregunta falsa</p>
+    <button class="verdadero" type="button" onclick="myFunction('mytxt6', true)">Verdadero</button>
+    <button class="falso" type="button" onclick="myFunction('mytxt6', false)">Falso</button>
+
+    <p id="mytxt7" class="true">7. Pregunta verdadera</p>
+    <button class="verdadero" type="button" onclick="myFunction('mytxt7', true)">Verdadero</button>
+    <button class="falso" type="button" onclick="myFunction('mytxt7', false)">Falso</button>
+    <script>
+        function myFunction(id, isTrue) {
+            var pregunta = document.getElementById(id);
+            if ((pregunta.getAttribute("class") == "true" && isTrue) || (pregunta.getAttribute("class") == "false" && !isTrue)) {
+                pregunta.style.color = "green";
+            } else {
+                pregunta.style.color = "red";
+            }
+        }
+    </script>
+</body>
+
+</html>
