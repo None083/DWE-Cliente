@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inversión array</title>
+</head>
+
+<body>
+    <p id="parrafo"></p>
+    <script>
+        let texto = "Buenos días hoy es lunes";
+        let textoInvertido = "";
+        let inicio = 0;
+        let final = 0;
+        let resultado = "";
+
+        while (inicio < texto.length) {
+            while (final < texto.length && texto[final] != " ") {
+                final++;
+            }
+            resultado = texto.substring(inicio, final);
+
+            for (let i = resultado.length - 1; i >= 0; i--) {
+                textoInvertido += resultado[i];
+            }
+
+            if (final < texto.length) {
+                textoInvertido += " ";
+            }
+            final++;
+            inicio = final;
+        }
+
+        document.getElementById("parrafo").innerHTML = textoInvertido;
+
+    </script>
+</body>
+
+</html>

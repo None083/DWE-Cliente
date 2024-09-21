@@ -24,21 +24,30 @@
         let i = 0;
         let j = 0;
 
-        for (i; i < arr1.length; i) {
-            for (j; j < arr2.length; j) {
-                if (arr1[i] > arr2[j]) {
-                    arr3.push(arr2[j]);
-                    j++;
-                } else {
-                    arr3.push(arr1[i]);
-                    i++;
-                }
-            }
-        }
-
         /*
         COMPLETA EL CÓDIGO EN ESTA SECCIÓN DEL PROGRAMA.
         */
+
+        while (i < arr1.length && j < arr2.length) {
+            if (arr1[i] > arr2[j]) {
+                arr3.push(arr2[j]);
+                j++;
+            } else {
+                arr3.push(arr1[i]);
+                i++;
+            }
+        }
+
+        while (i < arr1.length) {
+            arr3.push(arr1[i]);
+            i++;
+        }
+
+        while (j < arr2.length) {
+            arr3.push(arr2[j]);
+            j++;
+        }
+
         document.getElementById("demo").innerHTML = arr3;
     </script>
 </body>
