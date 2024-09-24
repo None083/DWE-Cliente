@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio de eventos</title>
+</head>
+<body>
+    <h1>Ejercicios de eventos</h1>
+    <h2>Onmouseover</h2>
+    <p id="txt-over" onmouseover="cambioColorOver()">Cambio de color si el mouse pasa sobre mi</p>
+    <h2>Onmouseout</h2>
+    <p id="txt-out" onmouseout="cambioColorOut()">Cambio de color si el mouse sale de mi</p>
+    <h2>Onblur</h2>
+    <input type="text" placeholder="Perdamos el foco" onblur="alertaBlur()" id="txt-blur">
+    
+    <script>
+        function cambioColorOver() {
+            var txt = document.getElementById("txt-over");
+            txt.style.color = "red";
+        }
+        function cambioColorOut() {
+            var txt = document.getElementById("txt-out");
+            txt.style.color = "blue";
+        }
+        function alertaBlur() {
+            alert("Lo hemos perdido :(");
+        }
+    </script>
+</body>
+</html>

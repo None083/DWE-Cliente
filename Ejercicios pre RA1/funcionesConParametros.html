@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funciones con parámetros</title>
+</head>
+<body>
+    <script>
+        function calcula(param1, param2, param3) {
+            if (arguments.length == 1) {
+                return Math.pow(param1, 3);
+            }else if(arguments.length == 2){
+                return param1 * param2;
+            }else{
+                return param1 + param2 + param3;
+            }
+        }
+        console.log(calcula(5));
+        console.log(calcula(5, 5));
+        console.log(calcula(5, 5, 5));
+    </script>
+</body>
+</html>
