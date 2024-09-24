@@ -38,8 +38,8 @@
                 while (k < cant) {
                     let i = generateRandomInt(0, arr.length);
                     let j = generateRandomInt(0, arr[0].length);
-                    if (arr[i][j] == " " &&
-                        (i == 0 || arr[i - 1][j] != "*")
+                    if (arr[i][j] == " "
+                        && (i == 0 || arr[i - 1][j] != "*")
                         && (j == 0 || arr[i][j - 1] != "*")
                         && (i == arr.length - 1 || arr[i + 1][j] != "*")
                         && (j == arr[i].length - 1 || arr[i][j + 1] != "*")) {
@@ -52,8 +52,8 @@
                 while (k < 1000000) {
                     let i = generateRandomInt(0, arr.length);
                     let j = generateRandomInt(0, arr[0].length);
-                    if (arr[i][j] == " " &&
-                        (i == 0 || arr[i - 1][j] != "*")
+                    if (arr[i][j] == " "
+                        && (i == 0 || arr[i - 1][j] != "*")
                         && (j == 0 || arr[i][j - 1] != "*")
                         && (i == arr.length - 1 || arr[i + 1][j] != "*")
                         && (j == arr[i].length - 1 || arr[i][j + 1] != "*")) {
@@ -63,6 +63,7 @@
                 }
             }
         }
+        //ponerBomba(arr, 10);
         //ponerBomba(arr, 20);
         ponerBomba(arr);
         console.log(arr);

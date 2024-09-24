@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de palabras en orden alfabético</title>
 </head>
+
 <body>
     <script>
-        let txt = "hola que tal estas estas como hola estas";
+        let txt = "hola que tal estas estas como hola estas ay ay ay fatal";
         let array = txt.split(" ");
-        console.log(array);
         array = array.sort();
         console.log(array);
+
         let aux = 0;
         for (let i = 0; i < array.length; i++) {
             for (let j = 0; j < array.length; j++) {
@@ -19,10 +21,11 @@
                     aux++;
                 }
             }
-            console.log(array[i] + " " + aux);
+            console.log(array[i] + " - " + aux);
             i = i + aux - 1;
             aux = 0;
         }
     </script>
 </body>
+
 </html>
