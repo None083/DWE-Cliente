@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronómetro</title>
+</head>
+
+<body>
+    <h1>Reloj</h1>
+    <p id="relojito"></p>
+    <h2>Cronómetro</h2>
+    <p id="crono">00:00:00</p>
+    <input type="button" value="Start" id="start" onclick="start()">
+    <input type="button" value="Pause" id="pause">
+    <input type="button" value="Reset" id="reset" onclick="reset()">
+    <script>
+        function iniciarReloj() {
+            let reloj;
+            let fecha = new Date();
+            let horas = fecha.getHours();
+            let minutos = fecha.getMinutes();
+            let segundos = fecha.getSeconds();
+            /*var ampm = "";
+            if (horas>12) {
+                ampm = "pm";
+                horas -= 12;
+            }else{
+                ampm = "am";
+            }*/
+            if (horas < 10) {
+                horas = "0" + horas;
+            }
+            if (minutos < 10) {
+                minutos = "0" + minutos;
+            }
+            if (segundos < 10) {
+                segundos = "0" + segundos;
+            }
+            let texto = document.getElementById("relojito");
+            texto.innerHTML = horas + ":" + minutos + ":" + segundos;
+        }
+        window.onload = function () {
+            reloj = setInterval(iniciarReloj, 1000);
+        }
+        function start() {
+            let cronometro;
+            let texto = document.getElementById("relojito");
+            texto.innerHTML = horas + ":" + minutos + ":" + segundos;
+        }
+        function reset() {
+            clearInterval(cronometro);
+        }
+
+    </script>
+</body>
+
+</html>
