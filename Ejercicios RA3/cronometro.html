@@ -11,9 +11,9 @@
     <h1>Reloj</h1>
     <p id="relojito"></p>
     <h2>Cronómetro</h2>
-    <p id="crono">00:00:00</p>
+    <p id="crono">0:0:0</p>
     <input type="button" value="Start" id="start" onclick="start()">
-    <input type="button" value="Pause" id="pause">
+    <input type="button" value="Pause" id="pause" onclick="pause()">
     <input type="button" value="Reset" id="reset" onclick="reset()">
     <script>
         function iniciarReloj() {
@@ -22,13 +22,6 @@
             let horas = fecha.getHours();
             let minutos = fecha.getMinutes();
             let segundos = fecha.getSeconds();
-            /*var ampm = "";
-            if (horas>12) {
-                ampm = "pm";
-                horas -= 12;
-            }else{
-                ampm = "am";
-            }*/
             if (horas < 10) {
                 horas = "0" + horas;
             }
@@ -38,23 +31,44 @@
             if (segundos < 10) {
                 segundos = "0" + segundos;
             }
-            let texto = document.getElementById("relojito");
-            texto.innerHTML = horas + ":" + minutos + ":" + segundos;
+            let textoReloj = document.getElementById("relojito");
+            textoReloj.innerHTML = horas + ":" + minutos + ":" + segundos;
         }
         window.onload = function () {
             reloj = setInterval(iniciarReloj, 1000);
         }
+
+        /*CRONÓMETRO*/
+        var cronometro;
+        var horasCrono = 0;
+        var minutosCrono = 0;
+        var segundosCrono = 0;
+
+        function iniciarCrono() {
+            segundosCrono++;
+            if (segundosCrono == 60) {
+                segundosCrono = 0;
+                minutosCrono++;
+                if (minutosCrono == 60) {
+                    minutosCrono = 0;
+                    horasCrono++;
+                }
+            }
+            let textoCrono = document.getElementById("crono");
+            textoCrono.innerHTML = horasCrono + ":" + minutosCrono + ":" + segundosCrono;
+        }
         function start() {
-            let cronometro;
-            let texto = document.getElementById("relojito");
-            texto.innerHTML = "00" + ":" + "00" + ":" + "00";
+            cronometro = setInterval(iniciarCrono, 1000);
         }
         function pause() {
             clearInterval(cronometro);
         }
-        function reset(){
-            let texto = document.getElementById("relojito");
-            texto,innerWidth = "00:00:00";
+        function reset() {
+            clearInterval(cronometro);
+            horasCrono = 0;
+            minutosCrono = 0;
+            segundosCrono = 0;
+            document.getElementById("crono").innerHTML = "0:0:0";
         }
 
     </script>

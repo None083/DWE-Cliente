@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios principiantes</title>
+</head>
+
+<body>
+    <p id="ejer1"></p>
+    <p id="ejer2"></p>
+    <p id="ejer3"></p>
+    <p id="ejer4"></p>
+    <p id="ejer5"></p>
+    <p id="ejer6"></p>
+    <p id="ejer7"><strong>7. </strong></p>
+    <p id="ejer8"><strong>8. </strong></p>
+    <p id="ejer9"><strong>9. </strong></p>
+    <p id="ejer10"><strong>10. </strong></p>
+    <script>
+        //Ejer 1
+        var precio = 200;
+        const IVA = 21;
+        var result = precio + ((precio * IVA) / 100);
+        var textoEjer1 = document.getElementById("ejer1");
+        textoEjer1.innerHTML = "<strong>1. </strong>" + result;
+
+        //Ejer 2
+        var lado = 40;
+        var area = lado * lado;
+        var perimetro = lado * 4;
+        var textoEjer2 = document.getElementById("ejer2");
+        textoEjer2.innerHTML = "<strong>2. </strong> Área: " + area + ", Perímetro: " + perimetro;
+
+        //Ejer 3
+        //var nombre = prompt("Escribe tu nombre");
+        var textoEjer3 = document.getElementById("ejer3");
+        textoEjer3.innerHTML = "<strong>3. </strong> Hola ";
+        //textoEjer3.innerHTML += nombre;
+
+
+        //Ejer 4
+        //var num1 = parseInt(prompt("Introduce el primer numero:"));
+        //var num2 = parseInt(prompt("Introduce el segundo numero:"));
+        //var num3 = parseInt(prompt("Introduce el tercer numero:"));
+        var textoEjer4 = document.getElementById("ejer4");
+        textoEjer4.innerHTML = "<strong>4. </strong> La media es: ";
+        //textoEjer4 += (num1 + num2 + num3) / 3;
+
+        //Ejer 5
+        //var km = parseFloat(prompt("Introduce el número de kilómetros:"));
+        //var litros = parseFloat(prompt("Introduce los litros de combustible consumidos:"));
+        var textoEjer5 = document.getElementById("ejer5");
+        textoEjer5.innerHTML = "<strong>5. </strong> Consumo de combustible por kilómetro: ";
+        //textoEjer5.innerHTML += litros / km;
+
+        //Ejer 6
+        var horas = 2;
+        var minutos = 30;
+        var resultado = (horas * 60 * 60) + (minutos * 60);
+        var textoEjer6 = document.getElementById("ejer6");
+        textoEjer6.innerHTML = "<strong>6. </strong> 2 horas y 30 minutos en segundos es: " + resultado;
+
+        //Ejer 7
+        //var numero = parseInt(prompt("Introduce un número de dos dígitos:"));
+        //var decenas = parseInt(numero / 10);
+        //var unidades = numero % 10;
+        var textoEjer7 = document.getElementById("ejer7");
+        //textoEjer7.innerHTML += "Decenas: " + decenas + ", Unidades " + unidades;
+
+        //Ejer 8
+        var personas = 5;
+        var grPatatasPorPersona = 200;
+        var huevosPorKiloPapas = 5;
+        var grCebollaPorKiloPapas = 300;
+        var kgPapasNecesarias = (grPatatasPorPersona * personas) / 1000;
+        var huevosNecesarios = huevosPorKiloPapas * kgPapasNecesarias;
+        var grCebollaNecesaria = grCebollaPorKiloPapas * kgPapasNecesarias;
+        var textoEjer8 = document.getElementById("ejer8");
+        textoEjer8.innerHTML += "Comensales: " + personas
+            + ", Kilos papas: " + kgPapasNecesarias
+            + ", Huevos: " + huevosNecesarios
+            + ", Gramos cebolla: " + grCebollaNecesaria;
+
+        //Ejer 9
+        var var1 = 10;
+        var var2 = 30;
+        var varAux = var2;
+        var2 = var1;
+        var1 = varAux;
+        var textoEjer9 = document.getElementById("ejer9");
+        textoEjer9.innerHTML += "Var1: " + var1 + ", Var2: " + var2;
+
+        //Ejer 10
+        var numParImpar = 50;
+        var esPar = 50%2==0;
+        var textoEjer10 = document.getElementById("ejer10");
+        textoEjer10.innerHTML += "Es par 50? " + esPar;
+
+    </script>
+</body>
+
+</html>
