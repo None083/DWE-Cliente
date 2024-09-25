@@ -47,10 +47,14 @@
         function start() {
             let cronometro;
             let texto = document.getElementById("relojito");
-            texto.innerHTML = horas + ":" + minutos + ":" + segundos;
+            texto.innerHTML = "00" + ":" + "00" + ":" + "00";
         }
-        function reset() {
+        function pause() {
             clearInterval(cronometro);
+        }
+        function reset(){
+            let texto = document.getElementById("relojito");
+            texto,innerWidth = "00:00:00";
         }
 
     </script>
