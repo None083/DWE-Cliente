@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+        let factorial = (num) => {
+            if (num == 0) {
+                        return 1;
+            } else {
+                        return (num*factorial(num-1));
+            }
+        console.log(factorial(5));
+        */
+
+
+        var array = [1, 2, 3, 4, 5];
+        function sumatorioArray(array, tamaño) {
+            if (tamaño == 0) {
+                return 0;
+            } else {
+                return array[tamaño - 1] + sumatorioArray(array, tamaño - 1);
+            }
+        }
+        console.log(sumatorioArray(array, array.length));
+    </script>
+</body>
+
+</html>
