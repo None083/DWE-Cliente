@@ -3,8 +3,7 @@
 
 <body>
     <h1>Cambio de imágenes con JavaScript</h1>
-    <img id="myFPImage" onclick="cambiaPic()" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdoGMWM3rlcdWv7Ob09NniubV8QKr2OR34Ow&s"
-        width="100" height="180">
+    <img id="myFPImage" onclick="cambiaPic()" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdoGMWM3rlcdWv7Ob09NniubV8QKr2OR34Ow&s">
     <p>Haz click sobre las imagenes para cambiarlas.</p>
     <script>
         function cambiaPic() {
@@ -13,6 +12,7 @@
                 image.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Cat_November_2010-1a.jpg/220px-Cat_November_2010-1a.jpg";
             } else if(image.src.match("upload")) {
                 image.src = "https://images.ctfassets.net/denf86kkcx7r/4IPlg4Qazd4sFRuCUHIJ1T/f6c71da7eec727babcd554d843a528b8/gatocomuneuropeo-97?fm=webp&w=612";
+                image.style.width = "20rem";
             } else if(image.src.match("images")) {
                 image.src = "https://static.nationalgeographic.es/files/styles/image_3200/public/nationalgeographic_1468962.jpg?w=1900&h=1400";
             } else{

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const numFijo = 1;
+        function secuencia(nRepeticiones, n1, n2, indice) {
+            var suma = 0;
+            if (nRepeticiones == indice) {
+                return 0;
+            }
+            if (n1 == 0 || n2 == 0) {
+                suma = 1;
+                if (n2 == 0) {
+                    n2 = 1;
+                } else {
+                    n1 = 1;
+                }
+            } else {
+                suma = n1 + n2 + numFijo;
+                n1 = n2;
+                n2 = suma;
+            }
+            console.log(suma);
+            secuencia(nRepeticiones, n1, n2, indice + 1);
+        }
+        secuencia(10, 0, 0, 0);
+
+    </script>
+</body>
+
+</html>
