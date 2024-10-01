@@ -12,6 +12,18 @@
     <script>
         let numeros = [1, [2, 3, 4], [8, 15, [5, 1]], 27];
 
+        function contar(arr, num) {
+            var suma = 0;
+            for (let i = 0; i < arr.length; i++) {
+                if (Array.isArray(arr[i])) {
+                    suma += contar(arr[i], num);
+                } else if (arr[i] == num) {
+                    suma++;
+                }
+            }
+            return suma;
+        }
+        console.log(contar(numeros, 1));
 
     </script>
 </body>

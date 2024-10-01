@@ -18,42 +18,55 @@
             [0, 0, 0, 0, 0, 0, 0]
         ];
 
-        for (let i = 0; i < minas.length; i++) {
-            for (let j = 0; j < minas[i].length; j++) {
-                if (minas[i][j] == 1) {
-                    if (minas[i - 1][j] == 0) {
-                        minas[i - 1][j] = 2;
-                        
+        function hayCeros() {
+            for (let i = 0; i < minas.length; i++) {
+                for (let j = 0; j < minas[i].length; j++) {
+                    if (minas[i][j] == 0) {
+                        return true;
                     }
-                    if (minas[i][j - 1] == 0) {
-                        minas[i][j - 1] = 2;
-                    }
-                    if (minas[i][j + 1] == 0) {
-                        minas[i][j + 1] = 2;
-                    }
-                    if (minas[i + 1][j] == 0) {
-                        minas[i + 1][j] = 2;
-                    }
-                    if (minas[i-1][j-1] == 0) {
-                        minas[i-1][j-1] = 2;
-                    }
-                    if (minas[i+1][j+1] == 0) {
-                        minas[i+1][j+1] = 2;
-                    }
-                    if (minas[i-1][j+1] == 0) {
-                        minas[i-1][j+1] = 2;
-                    }
-                    if (minas[i+1][j-1] == 0) {
-                        minas[i+1][j-1] = 2;
-                    }
-
                 }
-
             }
-
+            return false;
         }
-        console.log(minas);
 
+        function ponerMinas(num) {
+            if (!hayCeros()) {
+                return 0;
+            }
+            for (let i = 0; i < minas.length; i++) {
+                for (let j = 0; j < minas[i].length; j++) {
+                    if (minas[i][j] == num) {
+                        if (i > 0 && minas[i - 1][j] == 0) {
+                            minas[i - 1][j] = num + 1;
+                        }
+                        if (j > 0 && minas[i][j - 1] == 0) {
+                            minas[i][j - 1] = num + 1;
+                        }
+                        if (j < minas[i].length - 1 && minas[i][j + 1] == 0) {
+                            minas[i][j + 1] = num + 1;
+                        }
+                        if (i < minas.length - 1 && minas[i + 1][j] == 0) {
+                            minas[i + 1][j] = num + 1;
+                        }
+                        if (i > 0 && j > 0 && minas[i - 1][j - 1] == 0) {
+                            minas[i - 1][j - 1] = num + 1;
+                        }
+                        if (j < minas[i].length - 1 && i < minas.length - 1 && minas[i + 1][j + 1] == 0) {
+                            minas[i + 1][j + 1] = num + 1;
+                        }
+                        if (j < minas[i].length - 1 && i > 0 && minas[i - 1][j + 1] == 0) {
+                            minas[i - 1][j + 1] = num + 1;
+                        }
+                        if (i < minas.length - 1 && j > 0 && minas[i + 1][j - 1] == 0) {
+                            minas[i + 1][j - 1] = num + 1;
+                        }
+                    }
+                }
+            }
+            ponerMinas(num + 1);
+        }
+        ponerMinas(1);
+        console.log(minas);
     </script>
 
 </body>
