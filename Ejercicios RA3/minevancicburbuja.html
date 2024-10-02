@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let minas = [
+            [0, 0, 0, 0, 0, 0, 0],
+            [0, 1, 0, 0, 0, 0, 0],
+            [0, 1, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 1, 0],
+            [0, 0, 0, 0, 0, 1, 0],
+            [0, 0, 0, 0, 0, 0, 0]
+        ];
+
+        // cambiamos los 0 por 99
+        for (let i = 0; i < minas.length; i++) {
+            for (let j = 0; j < minas[i].length; j++) {
+                if (minas[i][j] == 0) {
+                    minas[i][j] = 99;
+                }
+            }
+        }
+
+        let flag = 1;
+        while (flag) {
+            flag = 0;
+
+            //recorrer la matriz
+            
+
+            /*Si la casilla no es 1 -> 
+            Buscar en las adyacentes y sumarle 1 -> 
+            actualizo casilla (si ese número es menor que el de la propia casilla)
+            
+            flag=1 si hago un cambio.
+           */
+        }
+
+    </script>
+</body>
+
+</html>
