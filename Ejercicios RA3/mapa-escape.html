@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El escape de Luis Candelas</title>
+</head>
+
+<body>
+    <script>
+        let mapa = [
+            ['*', '', '', '', '', ''],
+            ['*', '', '', '', '', ''],
+            ['*', '', '', '', '', ''],
+            ['*', '', '', '', '', ''],
+            ['*', '*', '*', '*', '*', '*']
+        ];
+
+        /*const entrada = { i: 0, j: 0 };
+        const salida = { i: mapa.length - 1, j: mapa[mapa.length - 1].length - 1 };
+        var coodenadasCamino = [];
+
+        for (let i = 0; i < mapa.length; i++) {
+            for (let j = 0; j < mapa[i].length; j++) {
+                if (mapa[i][j] == "*") {
+                    coodenadasCamino.push({ i: i, j: j });
+                }
+            }
+        }*/
+
+        function esValido(mapa, x = 0, y = 0, visitado = []) {
+            // Si estamos fuera de los límites del mapa o en una celda vacía, no es válido
+            if (x < 0 || y < 0 || x >= mapa.length || y >= mapa[0].length || mapa[x][y] !== '*') {
+                return false;
+            }
+
+            // Si hemos llegado a la esquina inferior derecha, el camino es válido
+            if (x === mapa.length - 1 && y === mapa[0].length - 1) {
+                return true;
+            }
+
+            // Marcamos la celda actual como visitada
+            visitado[x] = visitado[x] || [];
+            if (visitado[x][y]) {
+                return false;
+            }
+            visitado[x][y] = true;
+
+            // Intentamos movernos en las cuatro direcciones posibles
+            return esValido(mapa, x + 1, y, visitado) || // Abajo
+                esValido(mapa, x - 1, y, visitado) || // Arriba
+                esValido(mapa, x, y + 1, visitado) || // Derecha
+                esValido(mapa, x, y - 1, visitado);   // Izquierda
+        }
+
+        console.log(esValido(mapa)); // Debería imprimir true
+
+
+
+
+
+    </script>
+</body>
+
+</html>
