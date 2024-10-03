@@ -1,70 +1,110 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        table{
+        table {
             border: 1px solid grey;
             width: 20rem;
             height: auto;
             border-collapse: collapse;
         }
-        tr, td{
+
+        tr,
+        td {
             display: flex;
             border: 1px solid grey;
             width: 100%;
             height: auto;
+            background-color: grey;
         }
-        #pantalla{
+
+        #pantalla {
             border: 1px solid grey;
             width: 100%;
             height: 3rem;
             text-align: end;
             align-content: center;
             padding-right: 1rem;
+            background-color: rgb(247, 247, 247);
+            border-radius: 5px;
+            font-size: x-large;
+            font-weight: bold;
         }
-        button{
+
+        button {
             display: flex;
             width: 100%;
             justify-content: center;
             font-size: large;
+            font-weight: bold;
+            color: rgb(70, 70, 70);
+            background-color: lightgrey;
+            border-radius: 5px;
         }
     </style>
     <title>Calculadora</title>
 </head>
+
 <body>
     <table>
         <tr>
-            <td><div id="pantalla">hola</div></td>
+            <td>
+                <div id="pantalla"></div>
+            </td>
         </tr>
         <tr>
-            <td><button id="uno">1</button></td>
-            <td><button id="dos">2</button></td>
-            <td><button id="tres">3</button></td>
-            <td><button id="sumar">+</button></td>
+            <td><button type="button" id="uno" onclick="añadirCaracter('1')">1</button></td>
+            <td><button type="button" id="dos" onclick="añadirCaracter('2')">2</button></td>
+            <td><button type="button" id="tres" onclick="añadirCaracter('3')">3</button></td>
+            <td><button type="button" id="sumar" onclick="añadirCaracter('+')">+</button></td>
         </tr>
         <tr>
-            <td><button id="cuatro">4</button></td>
-            <td><button id="cinco">5</button></td>
-            <td><button id="seis">6</button></td>
-            <td><button id="restar">-</button></td>
+            <td><button type="button" id="cuatro" onclick="añadirCaracter('4')">4</button></td>
+            <td><button type="button" id="cinco" onclick="añadirCaracter('5')">5</button></td>
+            <td><button type="button" id="seis" onclick="añadirCaracter('6')">6</button></td>
+            <td><button type="button" id="restar" onclick="añadirCaracter('-')">-</button></td>
         </tr>
         <tr>
-            <td><button id="siete">7</button></td>
-            <td><button id="ocho">8</button></td>
-            <td><button id="nueve">9</button></td>
-            <td><button id="multi">x</button></td>
+            <td><button type="button" id="siete" onclick="añadirCaracter('7')">7</button></td>
+            <td><button type="button" id="ocho" onclick="añadirCaracter('8')">8</button></td>
+            <td><button type="button" id="nueve" onclick="añadirCaracter('9')">9</button></td>
+            <td><button type="button" id="multi" onclick="añadirCaracter('*')">*</button></td>
         </tr>
         <tr>
-            <td><button id="borrar">C</button></td>
-            <td><button id="cero">0</button></td>
-            <td><button id="igual">=</button></td>
-            <td><button id="dividir">/</button></td>
+            <td><button type="button" id="borrar" onclick="borrarTodo()">C</button></td>
+            <td><button type="button" id="cero" onclick="añadirCaracter('0')">0</button></td>
+            <td><button type="button" id="igual" onclick="calcular()">=</button></td>
+            <td><button type="button" id="dividir" onclick="añadirCaracter('/')">/</button></td>
         </tr>
     </table>
     <script>
 
+        function obtenerPantalla() {
+            return document.getElementById("pantalla");
+        }
+
+        function añadirCaracter(caracter) {
+            if (obtenerPantalla().textContent.includes("=") && caracter != "+" && caracter != "-" && caracter != "*" && caracter != "/") {
+                pantalla.textContent = caracter;
+            } else if (obtenerPantalla().textContent.includes("=")) {
+                pantalla.textContent = "error";
+            } else {
+                pantalla.textContent += caracter;
+            }
+        }
+
+        function borrarTodo() {
+            obtenerPantalla().textContent = "";
+        }
+
+        function calcular() {
+            obtenerPantalla().textContent += " = " + eval(pantalla.textContent);
+        }
+
     </script>
 </body>
+
 </html>
