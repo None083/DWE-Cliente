@@ -24,21 +24,24 @@
         /* INCLUYE AQUÍ TU PROGRAMA*/
 
         var contadorRepes = 0;
-        var indice2 = 0;
+        var resultado = "Resultado: ";
 
         for (let i = 0; i < arr1.length; i++) {
-            while (contadorRepes < 2) {
-                if (arr1[i] == arr1[indice2]) {
+            contadorRepes = 0;
+            var j = 0;
+            while (j < arr1.length) {
+                if (arr1[i] == arr1[j]  && i != j) {
                     contadorRepes++;
-                    indice2++;
                 }
+                j++;
             }
-            if (i = arr1.length - 1 && contadorRepes < 2) {
-                console.log(arr1[i]);
-                contadorRepes = 0;
+            if (contadorRepes == 0) {
+                resultado += arr1[i] + " - ";
             }
         }
 
+        var texto = document.getElementById("demo");
+        texto.innerHTML = resultado;
 
 
     </script>
