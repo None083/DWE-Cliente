@@ -14,16 +14,21 @@
         array = array.sort();
         console.log(array);
 
-        let aux = 0;
+        let contador = 0;
+
         for (let i = 0; i < array.length; i++) {
+
             for (let j = 0; j < array.length; j++) {
+
                 if (array[i] == array[j]) {
-                    aux++;
+                    contador++;
                 }
             }
-            console.log(array[i] + " - " + aux);
-            i = i + aux - 1;
-            aux = 0;
+
+            console.log(array[i] + " - " + contador);
+
+            i = i + contador - 1;
+            contador = 0;
         }
     </script>
 </body>

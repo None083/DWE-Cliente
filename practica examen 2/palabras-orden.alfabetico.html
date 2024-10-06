@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palabras en orden alfabético</title>
+</head>
+
+<body>
+    <script>
+        let texto = "erase una vez hola que tal hola una vez vez";
+        let arrayTexto = texto.split(" ");
+        arrayTexto.sort();
+        let contador = 1;
+        let palabra = "";
+
+        for (let i = 0; i < arrayTexto.length; i++) {
+
+            if (contador == 1) {
+                palabra = arrayTexto[i];
+            }
+
+            if (arrayTexto[i] == arrayTexto[i + 1]) {
+                contador++;
+            }
+
+            console.log(palabra + " " + contador);
+
+            if (arrayTexto[i] != arrayTexto[i + 1]) {
+                contador = 1;
+            }
+
+        }
+
+        console.log(arrayTexto);
+
+
+    </script>
+</body>
+
+</html>
