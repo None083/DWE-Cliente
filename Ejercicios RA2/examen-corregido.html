@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen vallhalla</title>
+</head>
+
+<body>
+    <script>
+        let arr = ["C", "U", "S", "R", "U"];
+
+        function reemplazar(arr) {
+            let aux = [];
+            for (let i = 0; i < arr.length; i++) {
+                switch (arr[i]) {
+                    case "U":
+                        aux[i] = 1;
+                        break;
+                    case "S":
+                        aux[i] = 7;
+                        break;
+                    case "D":
+                        aux[i] = 10;
+                        break;
+                    case "C":
+                        aux[i] = 50;
+                        break;
+                    case "X":
+                        aux[i] = 100;
+                        break;
+                    case "R":
+                        aux[i] = "-";
+                        break;
+                    default:
+                        aux[i] = 0;
+                        break;
+                }
+
+            }
+            return aux;
+        }
+
+        function resta(arr) {
+            let aux = [];
+            let pos = 0;
+            for (let i = 0; i < arr.length; i++) {
+                switch (arr[i]) {
+                    case "-":
+                        if (arr[i+1] == "-") {
+                            aux.push(arr[i]);
+                            break;
+                        }
+                        if (i<arr.length) {
+                            
+                        }
+                
+                    default:
+                        aux.push(arr[i]);
+                        break;
+                }
+                
+            }
+        }
+
+        function valhalla(a) {
+            // ESCRIBE TU CÓDIGO AQUÍ
+
+            return solucion;
+        }
+        console.log(valhalla(arr));
+    </script>
+</body>
+
+</html>

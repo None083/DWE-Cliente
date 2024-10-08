@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VALHALLA</title>
+</head>
+
+<body>
+    <script>
+
+        let arr = ["C", "U", "S", "R", "U"];
+        let arr2 = ["C", "R", "R", "R", "D"];//prueba resta multiple
+        function valhalla(arr) {
+            // ESCRIBE TU CÓDIGO AQUÍ
+            var solucion = 0;
+            for (let i = 0; i < arr.length; i++) {
+                //console.log(arr[i]);
+                switch (arr[i]) {
+                    case "X":
+                        solucion += 100;
+                        break;
+                    case "C":
+                        solucion += 50;
+                        break;
+                    case "D":
+                        solucion += 10;
+                        break;
+                    case "S":
+                        solucion += 7;
+                        break;
+                    case "U":
+                        solucion += 1;
+                        break;
+                    case "R":
+                        var aux = 0;
+                        var j = i;
+                        while (arr[j] == "R") {
+                            aux++;
+                            j++;
+                        }
+                        //console.log("veces resta:" + aux);
+
+                        var numSiguiente = i + aux;
+                        var total = 0;
+
+                        switch (arr[numSiguiente]) {
+                            case "X":
+                                total = (100 * aux);
+                                solucion -= total;
+                                aux = 0;
+                                total = 0;
+                                break;
+                            case "C":
+                                total = (40 * aux);
+                                solucion -= total;
+                                aux = 0;
+                                total = 0;
+                                break;
+                            case "D":
+                                total = (10 * aux);
+                                solucion -= total;
+                                aux = 0;
+                                total = 0;
+                                break;
+                            case "S":
+                                total = (7 * aux);
+                                solucion -= total;
+                                aux = 0;
+                                total = 0;
+                                break;
+                            case "U":
+                                total = (1 * aux);
+                                solucion -= total;
+                                aux = 0;
+                                total = 0;
+                                break;
+                            default:
+                                break;
+
+                                aux--;
+                        }
+                        i = numSiguiente + 1;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            return solucion;
+        }
+        console.log("Resultado 1: " + valhalla(arr));
+        console.log("Resultado 2: " + valhalla(arr2));
+    </script>
+</body>
+
+</html>
