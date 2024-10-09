@@ -25,7 +25,7 @@
 
         let array = JSON.parse(JSON.stringify(biocenosis));
 
-        
+
 
         function pandemic(arr, x, y) {
 
@@ -36,15 +36,18 @@
             var individuo_infectado = arr[x][y];
 
 
-            function pandemic(x, y){
-            if (arr[x][y] == individuo_infectado) {
-                arr[x][y] = "<3";
-                
-            }else{
-                return 0;
-            }}
-            pandemic(arr, x+1, y);
+            function enfermar(arr, x, y) {
+                if (arr[x][y] == individuo_infectado) {
+                    arr[x][y] = " ";
 
+                } else {
+                    return 0;
+                }
+                enfermar(x + 1, y);
+                enfermar(x, y + 1);
+                enfermar(x - 1, y);
+                enfermar(x, y - 1);
+            }
 
         }
 
