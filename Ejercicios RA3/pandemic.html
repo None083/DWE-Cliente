@@ -29,18 +29,20 @@
 
         function pandemic(arr, x, y) {
 
-            
+
 
             console.log(arr[x][y]);
 
             var individuo_infectado = arr[x][y];
 
+
+            function pandemic(x, y){
             if (arr[x][y] == individuo_infectado) {
                 arr[x][y] = "<3";
                 
             }else{
                 return 0;
-            }
+            }}
             pandemic(arr, x+1, y);
 
 
