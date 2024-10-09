@@ -21,41 +21,40 @@
             ['R', 'R', 'H', 'H', 'G', 'P']
         ];
 
-
-
-        let array = JSON.parse(JSON.stringify(biocenosis));
-
-
-
         function pandemic(arr, x, y) {
-
-
-
-            console.log(arr[x][y]);
-
             var individuo_infectado = arr[x][y];
 
+            function enfermar(x, y) {
 
-            function enfermar(arr, x, y) {
-                if (arr[x][y] == individuo_infectado) {
+                if (x < 0 || y < 0 || x >= arr.length || y >= arr[0].length) {
+                    return;
+                }
+
+                if (arr[x][y] === individuo_infectado) {
                     arr[x][y] = " ";
 
-                } else {
-                    return 0;
+                    enfermar(x + 1, y); //abajo
+                    enfermar(x - 1, y); //arriba
+                    enfermar(x, y + 1); //derecha
+                    enfermar(x, y - 1); //izquierda
                 }
-                enfermar(x + 1, y);
-                enfermar(x, y + 1);
-                enfermar(x - 1, y);
-                enfermar(x, y - 1);
             }
 
+            enfermar(x, y);
         }
 
-        console.log(biocenosis);
-        pandemic(array, 0, 0);
-        //pandemic(array, 4, 2);
-        console.log(array);
+        console.log("Estado inicial:");
+        console.table(biocenosis);
 
+        let array = JSON.parse(JSON.stringify(biocenosis));
+        pandemic(array, 0, 0);
+        console.log("Estado después de infectar desde (0, 0):");
+        console.table(array);
+
+        let array2 = JSON.parse(JSON.stringify(biocenosis));
+        pandemic(array2, 4, 2);
+        console.log("Estado después de infectar desde (4, 2):");
+        console.table(array2);
 
     </script>
 </body>
