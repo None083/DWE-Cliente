@@ -1,11 +1,59 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Angry Bats</title>
 </head>
+
 <body>
-    
+    <script>
+        var matriz = [
+            ["P", "P", "G", "H", "H", "R"],
+            ["P", "P", "G", "H", "H", "G"],
+            ["P", "G", "M", "H", "H", "G"],
+            ["G", "R", "M", "H", "G", "G"],
+            ["R", "R", "H", "H", "G", "P"]
+        ];
+
+        var matriz2 = JSON.parse(JSON.stringify(matriz));
+
+        function angrybats(fila, columna) {
+
+            if (matriz2[fila][columna] == "M") {
+                matriz2[fila][columna] = "m";
+
+            } else if (matriz2[fila][columna] == "H") {
+                matriz2[fila][columna] = " ";
+                
+            } else {
+                return;
+            }
+
+            if (fila > 0) {
+                angrybats(fila - 1, columna);
+            }
+
+            if (columna < matriz2[fila].length - 1) {
+                angrybats(fila, columna + 1);
+            }
+
+            if (fila < matriz2.length - 1) {
+                angrybats(fila + 1, columna);
+            }
+
+            if (columna > 0) {
+                angrybats(fila, columna - 1);
+            }
+
+
+        }
+
+        angrybats(2, 2);
+        console.table(matriz2);
+
+    </script>
 </body>
+
 </html>
