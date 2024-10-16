@@ -32,24 +32,47 @@
         }
         */
 
-        var malito = matriz2[0][0];
-        var flag = 1;
+        function pandemic(fila, columna) {
 
-        while (flag) {
-            for (let i = 0; i < matriz2.length; i++) {
-                for (let j = 0; j < matriz2[i].length; j++) {
+            var infectado = matriz2[fila][columna];
+            var flag = 1;
+            matriz2[fila][columna] = " ";
 
-                    if (matriz2[i][j] == malito) {
-                        matriz2[i][j] = " ";
-                        if (i > 0 && (matriz2[i - 1][j] == " " || matriz2[i][j + 1] == " " || matriz2[i + 1][j] == " " || matriz2[i][j - 1] == " ")) {
-                            matriz2[i][j] = " ";
-                            flag = 1;
+            while (flag) {
+                flag = 0;
+                for (let i = 0; i < matriz2.length; i++) {
+                    for (let j = 0; j < matriz2[i].length; j++) {
+
+                        if (matriz2[i][j] === infectado) {
+
+                            if (i > 0 && matriz2[i - 1][j] === " ") {
+                                matriz2[i][j] = " ";
+                                flag = 1;
+                            }
+
+                            if (j < matriz2[i].length - 1 && matriz2[i][j + 1] === " ") {
+                                matriz2[i][j] = " ";
+                                flag = 1;
+                            }
+
+                            if (i < matriz2.length - 1 && matriz2[i + 1][j] === " ") {
+                                matriz2[i][j] = " ";
+                                flag = 1;
+                            }
+
+                            if (j > 0 && matriz2[i][j - 1] === " ") {
+                                matriz2[i][j] = " ";
+                                flag = 1;
+                            }
+
                         }
                     }
                 }
             }
         }
 
+
+        pandemic(0, 0);
         console.table(matriz);
         console.table(matriz2);
 
