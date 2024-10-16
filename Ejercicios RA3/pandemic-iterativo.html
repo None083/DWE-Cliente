@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pandemic iterativo</title>
+</head>
+
+<body>
+    <script>
+        var matriz = [
+            ['P', 'P', 'G', 'H', 'H', 'R'],
+            ['P', 'P', 'G', 'H', 'H', 'G'],
+            ['P', 'G', 'R', 'H', 'H', 'G'],
+            ['G', 'R', 'R', 'H', 'G', 'G'],
+            ['R', 'R', 'H', 'H', 'G', 'P']
+        ];
+
+        var matriz2 = JSON.parse(JSON.stringify(matriz));
+
+        /*
+        saco especie: E -> " "
+        F = 1
+        while F{
+            F = 0
+            recorro matriz{
+                if especie[xy] = E y al lado = " "{
+                    [xy] = " " y F = 1
+                }
+            }
+        }
+        */
+
+        var malito = matriz2[0][0];
+        var flag = 1;
+
+        while (flag) {
+            for (let i = 0; i < matriz2.length; i++) {
+                for (let j = 0; j < matriz2[i].length; j++) {
+
+                    if (matriz2[i][j] == malito) {
+                        matriz2[i][j] = " ";
+                        if (i > 0 && (matriz2[i - 1][j] == " " || matriz2[i][j + 1] == " " || matriz2[i + 1][j] == " " || matriz2[i][j - 1] == " ")) {
+                            matriz2[i][j] = " ";
+                            flag = 1;
+                        }
+                    }
+                }
+            }
+        }
+
+        console.table(matriz);
+        console.table(matriz2);
+
+    </script>
+</body>
+
+</html>
