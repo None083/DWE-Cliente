@@ -15,14 +15,28 @@
         //Alguien sabe hacer una lista única de coches con los dos arrays (sin repeticiones)?
 
         //Alguien sabría decirme los coches de carrakos que no estén en cars?
+        let cars2 = cars.flat(Infinity);
+        let carrakos2 = carrakos.flat(Infinity);
 
-        var cars = ["Saab", "Volvo", "BMW", ["Honda", "Toyota", ["Lexus", "Mercedes", "Lada"], "Hyunday"]];
+        console.log(carrakos2.map(k => {
+            let aux = cars2.find(f => f == k)
+            if (aux == undefined) return k
+        }).filter(u => u != undefined));
+
+
         var buddies = [{ firstName: "Chuck", lastName: "Norris", car: "Honda" }, { firstName: "Yakie", lastName: "Chang", car: "BMV" }, { firstName: "Bruce", lastName: "Lee", car: "Honda" }, { firstName: "Steven", lastName: "Seagal", car: "Lada" }];
+        
         //-Nombre y apellidos de los buddies que usan un Honda
+        console.log(buddies.filter(f => f.car == "Honda").map(v => v.firstName + " " + v.lastName));
 
         //-Marcas utilizadas por los buddies
+        console.log(buddies.map(m => m.car));
 
         //-Marcas no utilizadas por los buddies.
+        console.log(carrakos2.map(k => {
+            let aux = buddies.find(f => f.car == k)
+            if (aux == undefined) return k
+        }).filter(u => u != undefined));
 
         //-Cuantas marcas han sido utilizadas
 
