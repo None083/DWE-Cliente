@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palabras en orden</title>
+</head>
+
+<body>
+    <script>
+        let texto = "hola QUe tal tal hola amigo";
+
+        function ordenarPalabras(texto) {
+            // Convertir el texto a minúsculas y eliminar caracteres que no sean letras o espacios
+            texto = texto.toLowerCase().replace(/[^a-záéíóúüñ\s]/g, '');
+
+            // Dividir el texto en palabras y ordenar
+            let palabras = texto.split(" ").sort();
+
+            let cont = 1;  // Inicializamos el contador en 1 para la primera palabra
+
+            for (let i = 0; i < palabras.length; i++) {
+                // Si la palabra actual es igual a la siguiente, incrementamos el contador
+                if (palabras[i] == palabras[i + 1]) {
+                    cont++;
+                } else {
+                    // Si la palabra actual es distinta a la siguiente o es la última palabra, la imprimimos
+                    console.log(palabras[i] + " " + cont);
+                    cont = 1;  // Reiniciar el contador para la siguiente palabra
+                }
+            }
+        }
+        ordenarPalabras(texto);
+    </script>
+</body>
+
+</html>
