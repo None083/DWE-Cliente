@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen 3 arrays ordenados</title>
+</head>
+
+<body>
+    <h2>JavaScript Arrays</h2>
+    <p> Tenemos tres arrays arr1 arr2 y arr3 y queremos insertarlos de forma
+        ordenada en un cuarto array arr4.
+        Importante: hay que insertarlo de forma ordenada.
+        Solo puedes utilizar el método de arrays push() y length().
+        No puedes modificar los arrays arr1 arr2 o arr3.
+        Muestra el resultado en el campo demo.
+        No puedes crear más variables que las que se te ofrecen.
+    </p>
+    <p id="demo"></p>
+    <script>
+        /*const arr1 = [1, 2, 3, 7, 9];
+        const arr2 = [4, 5, 6, 9, 9];
+        const arr3 = [7, 9, 15, 19, 25, 38, 49];*/
+        
+        //PRUEBAS
+        const arr1 = [1, 2, 2, 3, 3, 4, 6, 7, 8, 9, 88, 89];
+        const arr2 = [1, 1, 4, 5, 6, 9, 9];
+        const arr3 = [1, 3, 7, 9, 15, 19, 25, 38, 49];
+
+        var arr4 = []
+        let i = 0;
+        let j = 0;
+        let k = 0;
+        /*AQUÍ VA TU CÓDIGO*/
+
+        //El bucle se ejecuta mientras la longitud del array4 sea menor a la suma de los otros tres arrays en total
+        while (arr4.length < (arr1.length + arr2.length + arr3.length)) {
+            // Se pushea el primer elemento del array1 si aún quedan elementos de este por reocorrer
+            //y antes de comparar si el elemento del array1 es menor al del array2
+            //se comprueba si quedan elementos por recorrer del array2 para no salirnos de este.
+            // Lo mismo para comparar el array1 con el array3
+            if (i < arr1.length && (j >= arr2.length || arr1[i] <= arr2[j]) && (k >= arr3.length || arr1[i] <= arr3[k])) {
+                // En caso de que todo sea correcto y arr1[i] sea mayor que arr2[j] y arr3[k] se añade el elemento
+                arr4.push(arr1[i]);
+                //y se mueve el indice de dicho array
+                i++;
+            } else if (j < arr2.length && (k >= arr3.length || arr2[j] <= arr3[k])) {
+                arr4.push(arr2[j]);
+                j++;
+            } else if (k < arr3.length) {
+                arr4.push(arr3[k]);
+                k++;
+            }
+        }
+
+        document.getElementById("demo").innerHTML = arr4;
+    </script>
+</body>
+
+</html>
