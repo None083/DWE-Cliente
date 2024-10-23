@@ -12,20 +12,24 @@
     <script>
         var cars = ["Saab", "Volvo", "BMW", ["Honda", "Toyota", ["Lexus", "Mercedes", "Lada"], "Hyunday"]];
         var carrakos = ["Chevrolet", "Tesla", "BMW", ["Honda", "Infiniti", ["Lexus", "Mercedes", "Kia"], "Hyunday"], ["Mazda", "Mercedes", "Jeep", ["KTM", "Nissan", "Isuzu"]]];
-        //Alguien sabe hacer una lista única de coches con los dos arrays (sin repeticiones)?
-
-        //Alguien sabría decirme los coches de carrakos que no estén en cars?
         let cars2 = cars.flat(Infinity);
         let carrakos2 = carrakos.flat(Infinity);
+        var buddies = [{ firstName: "Chuck", lastName: "Norris", car: "Honda" },
+        { firstName: "Yakie", lastName: "Chang", car: "BMW" },
+        { firstName: "Bruce", lastName: "Lee", car: "Honda" },
+        { firstName: "Steven", lastName: "Seagal", car: "Lada" }];
 
+        //Alguien sabe hacer una lista única de coches con los dos arrays (sin repeticiones)?
+        var cochesUnicos = [...cars2, ...carrakos2]
+            .filter((car, index, indexActual) => indexActual.indexOf(car) === index);
+        console.log("Coches únicos: " + cochesUnicos);
+
+        //Alguien sabría decirme los coches de carrakos que no estén en cars?
         console.log(carrakos2.map(k => {
             let aux = cars2.find(f => f == k)
             if (aux == undefined) return k
         }).filter(u => u != undefined));
 
-
-        var buddies = [{ firstName: "Chuck", lastName: "Norris", car: "Honda" }, { firstName: "Yakie", lastName: "Chang", car: "BMV" }, { firstName: "Bruce", lastName: "Lee", car: "Honda" }, { firstName: "Steven", lastName: "Seagal", car: "Lada" }];
-        
         //-Nombre y apellidos de los buddies que usan un Honda
         console.log(buddies.filter(f => f.car == "Honda").map(v => v.firstName + " " + v.lastName));
 
@@ -35,12 +39,20 @@
         //-Marcas no utilizadas por los buddies.
         console.log(carrakos2.map(k => {
             let aux = buddies.find(f => f.car == k)
-            if (aux == undefined) return k
-        }).filter(u => u != undefined));
+            if (!aux) return k
+        }).filter(u => u !== undefined));
 
         //-Cuantas marcas han sido utilizadas
+        var cochesUsados = buddies.map(b => b.car)
+            .filter((car, index, indexActual) => indexActual.indexOf(car) === index);
+        console.log("Total de marcas utilizadas por buddies:", cochesUsados.length);
+        console.log("Marcas utilizadas por buddies:", cochesUsados);
 
         //-Cuantas marcas no han sido utilizadas
+        var cochesNoUsados = [...cars2, ...carrakos2]
+            .filter((car, index, indexActual) => indexActual.indexOf(car) === index && !cochesUsados.includes(car));
+        console.log("Total de marcas no utilizadas por buddies:", cochesNoUsados.length);
+        console.log("Marcas no utilizadas por buddies:", cochesNoUsados);
 
 
     </script>
