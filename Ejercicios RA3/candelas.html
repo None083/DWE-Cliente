@@ -15,7 +15,31 @@
                     ['*', '', '', '', '', ''],
                     ['*', '*', '*', '*', '*', '*']];
 
-        
+        let mapaCopia = JSON.parse(JSON.stringify(mapa));
+
+        function heaven(mapa, i, j) {
+            if (i < 0 || i > mapa.length - 1 || j < 0 || j > mapa[0].length - 1) {
+                return false;
+            }
+            if (mapa[i][j] == "*") {
+                mapa[i][j] = "x";
+                if (i == 4 && j == 5) {
+                    return true;
+                } else {
+                    return (heaven(mapa, i + 1, j) || heaven(mapa, i, j - 1) || heaven(mapa, i - 1, j) || heaven(mapa, i, j + 1));
+                }
+            }
+            return false;
+        }
+
+        console.log(heaven(mapaCopia, 0, 0));
+
+
+
+
+
+
     </script>
 </body>
+
 </html>

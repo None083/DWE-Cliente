@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="number" id="numero" value="5" min="1" max="10">
+    <p id="parrafo"></p>
+    <button type="button" onclick="dale()">Dale</button>
+    <script>
+    const crearMatriz = (grado) => {
+        let matriz = [];
+        // Hago la matriz con 0 primero
+        for (let i = 0; i < grado; i++) {
+            matriz.push([]);
+            for (let j = 0; j < grado; j++) {
+                matriz[i].push(0);
+            }
+        }
+
+        // Relleno la piramide
+        matriz[0][0] = 1; // Pongo el 1 de la primera fila
+        for (let i = 1; i < grado; i++) {
+            for (let j = 0; j < grado; j++) {
+                if (j - 1 >= 0){
+                    matriz[i][j] = matriz[i - 1][j] + matriz[i - 1][j - 1];
+                } else {
+                    matriz[i][j] = 1;
+                }
+            }
+        }
+        return matriz;
+    }
+
+    const mostrarPiramide = (array) => {
+        parrafo = document.getElementById("parrafo");
+        parrafo.innerHTML = "";
+        parrafo.innerHTML += "La pirámide de grado " + array.length + " es:"
+        for (let i = 0; i < array.length; i++) {
+            parrafo.innerHTML += "<br/>";
+            // Pongo espacios
+            for (let k = 0; k < array.length - i; k++) {
+                    parrafo.innerHTML += "&nbsp;";
+                }
+            
+            for (let j = 0; j < array.length; j++) {
+                if (array[i][j] != 0){
+                    parrafo.innerHTML += array[i][j] + "&nbsp;"
+                }
+            }
+        }
+    }
+
+        function dale() {
+            let grado = document.getElementById("numero").value;
+            let piramide = crearMatriz(grado);
+            mostrarPiramide(piramide);
+        }
+
+        
+
+    </script>
+</body>
+
+</html>
