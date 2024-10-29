@@ -26,7 +26,10 @@
                 if (i == 4 && j == 5) {
                     return true;
                 } else {
-                    return (heaven(mapa, i + 1, j) || heaven(mapa, i, j - 1) || heaven(mapa, i - 1, j) || heaven(mapa, i, j + 1));
+                    return (heaven(mapa, i + 1, j) 
+                         || heaven(mapa, i, j - 1) 
+                         || heaven(mapa, i - 1, j) 
+                         || heaven(mapa, i, j + 1));
                 }
             }
             return false;
