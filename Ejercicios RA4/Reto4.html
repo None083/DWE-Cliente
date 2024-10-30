@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reto 3</title>
+    <title>Document</title>
 </head>
 
 <body>
-    <h1>Reto III</h1>
+    <p id="result"></p>
     <script>
-        //Se pide la suma y la media de las notas de DWEC en tres líneas.
+        //Se pide que hagas un programa que muestre la media 
+        //de TODAS las notas de los 3 alumnos que tenemos en nuestro JSON.
         var valumnos = {
             "alumnos": [{
                 "nombre": "Fulanito",
@@ -51,11 +52,13 @@
             ]
         };
 
-        var suma = 0;
-        valumnos.alumnos.map(alumno => suma += alumno.notas.DWEC);
-        var media = suma / valumnos.alumnos.length;
-        console.log("La suma de las notas de DWEC es: " + suma);
-        console.log("La media de las notas de DWEC es: " + media);
+        valumnos.alumnos.map(alumno => {
+            var media = (alumno.notas.DWEC + alumno.notas.DWESE
+                + alumno.notas.ED + alumno.notas.SSOO
+                + alumno.notas.PROG + alumno.notas.EINEM) / 7;
+            console.log("El alumno " + alumno.nombre + " tiene de media: " + media);
+        })
+
 
     </script>
 </body>

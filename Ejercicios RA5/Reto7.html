@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Frutas tropicales con stock menor a 40</h1>
+    <ul id="frutas"> </ul>
+    <script>
+        let frutas = ["aguacate", "pera", "manzana", "naranja", "tomate", "granada", "mango", "litchi", "nispero"];
+        let tropicStock = [
+            { fruta: "aguacate", stock: 50 },
+            { fruta: "mango", stock: 10 },
+            { fruta: "litchi", stock: 20 },
+            { fruta: "nispero", stock: 25 }];
+
+        // muestra las frutas tropicales con stock menor a 40 como elementos li y su nodo padre será el ul frutas
+
+        //Desde el array de objetos tropicStock
+        tropicStock.filter(f => f.stock < 40).map(n => n.fruta).map(e => {
+            let lista = document.createElement("li");
+            var contenido = document.createTextNode(e);
+            lista.appendChild(contenido);
+            document.getElementById("frutas").appendChild(lista);
+        });
+
+        //Desde el array frutas
+        frutas.filter(f => {
+            let tropic = tropicStock.find(t => t.fruta === f && t.stock < 40);
+            return tropic !== undefined;
+        }).map(f => {
+            let lista = document.createElement("li");
+            let contenido = document.createTextNode(f);
+            lista.appendChild(contenido);
+            document.getElementById("frutas").appendChild(lista);
+        });
+
+    </script>
+</body>
+
+</html>

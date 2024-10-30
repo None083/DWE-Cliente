@@ -37,7 +37,7 @@
         console.log(buddies.map(m => m.car));
 
         //-Marcas no utilizadas por los buddies.
-        console.log(carrakos2.map(k => {
+        console.log("hola "+ carrakos2.map(k => {
             let aux = buddies.find(f => f.car == k)
             if (!aux) return k
         }).filter(u => u !== undefined));
@@ -45,12 +45,14 @@
         //-Cuantas marcas han sido utilizadas
         var cochesUsados = buddies.map(b => b.car)
             .filter((car, index, indexActual) => indexActual.indexOf(car) === index);
+
         console.log("Total de marcas utilizadas por buddies:", cochesUsados.length);
         console.log("Marcas utilizadas por buddies:", cochesUsados);
 
         //-Cuantas marcas no han sido utilizadas
         var cochesNoUsados = [...cars2, ...carrakos2]
             .filter((car, index, indexActual) => indexActual.indexOf(car) === index && !cochesUsados.includes(car));
+            
         console.log("Total de marcas no utilizadas por buddies:", cochesNoUsados.length);
         console.log("Marcas no utilizadas por buddies:", cochesNoUsados);
 

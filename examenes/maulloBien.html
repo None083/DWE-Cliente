@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maullo</title>
+</head>
+
+<body>
+    <script>
+        let arrMaullo = [
+            ['X', '', '', 'X', 'X', ''],
+            ['X', '', '', '', 'X', ''],
+            ['X', '', '', '', 'X', 'X'],
+            ['X', 'X', '', '', '', ''],
+            ['', 'X', 'X', 'X', 'X', 'X']];
+
+        const maxx = arrMaullo.length;
+        const maxy = arrMaullo[0].length;
+
+        var copiaMaullo = JSON.parse(JSON.stringify(arrMaullo));
+
+
+        function maullo(arr, x, y) {
+            
+            var cont = 0;
+            if (arr[x][y] == "X") {
+
+                cont++;
+                arr[x][y] = "*";
+                if (x + 1 < maxx) {
+                    cont += maullo(arr, x + 1, y);
+                }
+                if (y - 1 > 0) {
+                    cont += maullo(arr, x, y - 1);
+                }
+                if (x - 1 > 0) {
+                    cont += maullo(arr, x - 1, y);
+                }
+                if (y + 1 < maxy) {
+                    cont += maullo(arr, x, y + 1);
+                }
+            }
+
+            return cont;
+        }
+
+
+
+        console.log(maullo(copiaMaullo, 0, 3));
+        console.table(copiaMaullo);
+
+
+    </script>
+</body>
+
+</html>
