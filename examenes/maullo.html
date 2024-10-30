@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maullo</title>
+</head>
+
+<body>
+    <script>
+        let arrMaullo = [
+            ['X', '', '', 'X', 'X', ''],
+            ['X', '', '', '', 'X', ''],
+            ['X', '', '', '', 'X', 'X'],
+            ['X', 'X', '', '', '', ''],
+            ['', 'X', 'X', 'X', 'X', 'X']];
+
+        const maxx = arrMaullo.length;
+        const maxy = arrMaullo[0].length;
+
+        var copiaMaullo = JSON.parse(JSON.stringify(arrMaullo));
+        var cont = 0;
+
+        function maullo(arr, x, y) {
+            if (arr[x][y] == "X") {
+                cont++;
+                arr[x][y] = "*";
+            }
+
+            if ((x + 1 > maxx - 1 || arr[x + 1][y] != "X")
+                && (y - 1 < 0 || arr[x][y - 1] != "X")
+                && (x - 1 < 0 || arr[x - 1][y] != "X")
+                && (y + 1 > maxy - 1 || arr[x][y + 1] != "X")) {
+                console.log("hola");
+                return cont;
+            }
+            
+            cont += (x + 1 > maxx - 1 || maullo(arr, x + 1, y))
+                || (y - 1 < 0 || maullo(arr, x, y - 1))
+                || (x - 1 < 0 || maullo(arr, x - 1, y))
+                || (y + 1 > maxy - 1 || maullo(arr, x, y + 1));
+
+            return cont;
+        }
+
+        
+
+        console.log(maullo(copiaMaullo, 0, 0));
+        console.table(copiaMaullo);
+
+
+    </script>
+</body>
+
+</html>
