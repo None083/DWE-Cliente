@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>RECURSIVIDAD</title>
+</head>
+
+<body>
+    <h1>FindMyGuy</h1>
+    <h3>Lista de personas:</h3>
+    <p id="lista"></p>
+    <h3>Veces que aparece la persona buscada:</h3>
+    <p id="busqueda"></p>
+    <script>
+        let people = ["perico", "juanico",
+            "andres", "dimas", "gestas", "zarco", "maimonides",
+            "elias", "jeremias", "dimas", "dimas", "gestas"];
+
+        function findMyGuy(people, nombre, index) {
+            if (index >= people.length) {
+                return 0;
+            }
+            let cont = 0;
+
+            if (people[index] == nombre) {
+                cont++;
+            }
+            cont += findMyGuy(people, nombre, index + 1);
+
+            return cont;
+        }
+
+        document.getElementById("busqueda").innerHTML = findMyGuy(people, "dimas", 0);
+
+    </script>
+</body>
+
+</html>

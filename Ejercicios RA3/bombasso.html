@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>BOMBASSO</h2>
+    <p> Se pide que crees un programa que genere un campo de minas.
+        Las minas se colocan de forma aleatoria pero teniendo
+        en cuenta que no se deben colocar dos minas juntas.
+        realiza el programa para que genere 10, 20 o todas
+        las minas que se puedan instalar.
+    </p>
+    <p id="demo"></p>
+    <script>
+        var arr = [
+            [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+            [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+        ];
+        function generateRandomInt(min, max) {
+            return Math.floor((Math.random() * (max - min)) + min);
+        }
+
+        /*COLOCA AQUÍ TU CÓDIGO*/
+
+        function ponerBomba(arr, cant) {
+            if (cant <= 0) return; // Caso base: si no hay minas restantes, termina la función
+
+            let i = generateRandomInt(0, arr.length);
+            let j = generateRandomInt(0, arr[0].length);
+
+            // Verificar si la posición es válida para colocar una mina
+            if (arr[i][j] == " "
+                && (i == 0 || arr[i - 1][j] != "*")
+                && (j == 0 || arr[i][j - 1] != "*")
+                && (i == arr.length - 1 || arr[i + 1][j] != "*")
+                && (j == arr[0].length - 1 || arr[i][j + 1] != "*")) {
+
+                arr[i][j] = "*"; // Coloca la mina
+                ponerBomba(arr, cant - 1); // Llamada recursiva para colocar la siguiente mina
+            } else {
+                ponerBomba(arr, cant); // Si la posición es inválida, intenta de nuevo sin reducir `cant`
+            }
+        }
+
+        // Llama a la función para colocar 10, 20, o todas las minas posibles
+        ponerBomba(arr, 10); // Cambia el número de minas según lo que quieras colocar
+        console.log(arr);
+    </script>
+</body>
+
+</html>

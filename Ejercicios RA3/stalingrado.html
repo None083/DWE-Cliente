@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candelas</title>
+</head>
+
+<body>
+    <script>
+        let mapa = [
+        ['A', '', 'R', '', '', ''],
+        ['A', '', 'R', '', '', ''],
+        ['A', '', 'R', '', '', ''],
+        ['', '', '', '', '', ''],
+        ['', '', 'R', '', 'A', 'A']];
+
+        let mapaCopia = JSON.parse(JSON.stringify(mapa));
+
+        function stalingrado(mapa, i, j) {
+            if (i < 0 || i > mapa.length - 1 || j < 0 || j > mapa[0].length - 1) {
+                return false;
+            }
+            if (mapa[i][j] == "A" || mapa[i][j] == "") {
+                mapa[i][j] = "x";
+
+                return (stalingrado(mapa, i + 1, j)
+                    || stalingrado(mapa, i, j - 1)
+                    || stalingrado(mapa, i - 1, j)
+                    || stalingrado(mapa, i, j + 1));
+
+            }
+            return false;
+        }
+
+        stalingrado(mapaCopia, 0, 0);
+
+        function alemanesPierden(mapa) {
+            for (let i = 0; i < mapa.length; i++) {
+                for (let j = 0; j < mapa[i].length; j++) {
+                    if (mapa[i][j] == "A") {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        console.log(alemanesPierden(mapaCopia));
+
+    </script>
+</body>
+
+</html>
