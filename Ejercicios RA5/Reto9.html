@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>retos JavaScript</h1>
+    <ul id="carrakos"> </ul>
+
+    <script>
+
+        let carrakos =
+            ["Chevrolet", "Tesla", "BMW",
+                ["Honda", "Infiniti", ["Lexus", "Mercedes", "Kia"], "Hyunday"],
+                ["Mazda", "Mercedes", "Jeep", ["KTM", "Nissan", "Isuzu"]]];
+
+        let xungos =
+            [{ nombre: "Bruce Lee", carros: ["Chevrolet", "Tesla", "BMW"] },
+            { nombre: "YakiChan", carros: ["Lexus", "Mercedes", "Kia"] }];
+
+        //Se pide que saques los coches del array 
+        //pero si tienen dueño lo especifiques.
+        //Se muestra imagen con la solución.
+
+        function crearLista(arr, ul) {
+            arr.map(e => {
+                if (Array.isArray(e)) {
+                    let nuevaUl = document.createElement("ul");
+                    ul.appendChild(nuevaUl);
+                    crearLista(e, nuevaUl);
+
+                } else {
+                    let contiene = false;
+                    let li = document.createElement("li");
+                    xungos.map(p => {
+                        if (p.carros.find(c => { return c == e })) {
+                            contiene = true;
+                            let contenido = document.createTextNode(e + " de " + p.nombre);
+                            li.appendChild(contenido);
+                            ul.appendChild(li);
+                        }
+                    })
+                    if (!contiene) {
+                        let contenido = document.createTextNode(e);
+                        li.appendChild(contenido);
+                        ul.appendChild(li);
+                    }
+                }
+            })
+        }
+
+        crearLista(carrakos, document.getElementById("carrakos"));
+
+    </script>
+</body>
+
+</html>
