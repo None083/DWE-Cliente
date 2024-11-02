@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var clientaUno = ""
+        var clientaDos = ""
+        var clientaTres = ""
+
+
+        var numclientaUno = 0;
+        var numclientaDos = 0;
+        var numclientaTres = 0;
+
+
+        const TORTAS = ["Valia", "Rodica", "Emma", "Sofia", "Marina", "Valia", "Valia", "Valia", "Valia", "Valia", "Valia", "Emma", "Emma", "Maria", "Marina", "Emma"]
+
+
+        // ESCRIBE AQUÍ TU CÓDIGO
+        const coloca = (nombre, cuantos) => {
+            console.log(clientaUno + numclientaUno + clientaDos + numclientaDos + clientaTres + numclientaTres)
+            if (cuantos > numclientaUno) {
+                if (nombre != clientaUno) {
+                    clientaTres = clientaDos; numclientaTres = numclientaDos;
+                    clientaDos = clientaUno; numclientaDos = numclientaUno;
+                }
+                clientaUno = nombre;
+                numclientaUno = cuantos;
+                return 0;
+            }
+            if (cuantos > numclientaDos && nombre != clientaUno) {
+                if (nombre != clientaDos) {
+                    clientaTres = clientaDos; numclientaTres = numclientaDos;
+                }
+                clientaDos = nombre;
+                numclientaDos = cuantos;
+                return 0;
+            }
+            if (cuantos > numclientaTres && nombre != clientaUno && nombre != clientaDos) {
+
+                clientaTres = nombre;
+                numclientaTres = cuantos;
+                return 0;
+            }
+        }
+
+        TORTAS.map(t => {
+            coloca(t, TORTAS.filter(f => f === t).length)
+        })
+        console.log(clientaUno + ":" + numclientaUno)
+        console.log(clientaDos + ":" + numclientaDos)
+        console.log(clientaTres + ":" + numclientaTres)
+
+    </script>
+</body>
+</html>

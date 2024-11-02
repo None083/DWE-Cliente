@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="ciudad" value="ESTE">
+    <button type="button" onclick="dale()">ejecuta</button>
+    <p id="resultado"></p>
+
+    <script>
+        let numeros = [{ cp: 28924, ciudad: 'ESTEPONA' }, { cp: 29601, ciudad: 'MARBELLA' }];
+
+        //Lo que queremos es crear un texto y un botón que ponga buscar 
+        //que lo que haga sea mostrar el CP y el nombre de la ciudad 
+        //que coincida o contenga el texto del campo creado. 
+        //No importan las mayúsculas y minúsculas en la búsqueda.
+
+        function dale() {
+            let texto = document.getElementById("ciudad").value.toLowerCase();
+            let result = numeros.find(c => c.ciudad.toLowerCase().includes(texto));
+            if (result) {
+                document.getElementById("resultado").innerHTML = result.ciudad + ", " + result.cp;
+            }else{
+                document.getElementById("resultado").innerHTML = "Ciudad no encontrada ";
+            }
+        }
+
+    </script>
+</body>
+
+</html>
