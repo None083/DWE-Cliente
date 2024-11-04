@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Reto 10</h1>
+    <p id="comunicado"></p>
+    <script>
+        // Realiza una función flecha que dado el nombre de un vikingo diga si fue un rey o no.
+        var vikings = '{"vikingos":[{"reino":"Noruega","reyes":["Hakon","Harald","Ivar","Olaf","Bjorn","Ragnar"]},{"reino":"Dinamarca","reyes":["Frodo","Hamming","Angantyr","Horik"]}]}';
+        // skriv inn koden din her. Vær forsiktig med at json-en jukser. Det er ikke en matrise, men et objekt.
+        // ingresa tu código aquí. Cuidado que el json hace trampa. No es una matriz, sino un objeto.
+
+        let viks = JSON.parse(vikings);
+        let encontrarRey = (rey) => {
+            let reyes = viks.vikingos.map(v => v.reyes);
+            return reyes.find(arrReyes => arrReyes.find(r => r === rey)) !== undefined;
+        }
+
+        console.log(esRey("Ragnar")); // true
+        console.log(esRey("Bjorn")); // true
+        console.log(esRey("Loki")); // false
+
+
+
+    </script>
+</body>
+
+</html>
