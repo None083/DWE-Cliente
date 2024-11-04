@@ -18,13 +18,15 @@
 
         let viks = JSON.parse(vikings);
         let encontrarRey = (rey) => {
-            let reyes = viks.vikingos.map(v => v.reyes);
-            return reyes.find(arrReyes => arrReyes.find(r => r === rey)) !== undefined;
+            if(viks.vikingos.map(e => e.reyes).find(arr => arr.find(r => r == rey)) != undefined){
+                return true;
+            }
+            return false;
         }
 
-        console.log(esRey("Ragnar")); // true
-        console.log(esRey("Bjorn")); // true
-        console.log(esRey("Loki")); // false
+        console.log(encontrarRey("Ragnar")); // true
+        console.log(encontrarRey("Bjorn")); // true
+        console.log(encontrarRey("Felipe VI")); // false
 
 
 

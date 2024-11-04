@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>retos JavaScript</h1>
+    <script>
+        var cars = ["Saab", "Volvo", "BMW", ["Honda", "Toyota", ["Lexus", "Mercedes", "Lada"], "Hyunday"]];
+        var carrakos = ["Chevrolet", "Tesla", "BMW", ["Honda", "Infiniti", ["Lexus", "Mercedes", "Kia"], "Hyunday"], ["Mazda", "Mercedes", "Jeep", ["KTM", "Nissan", "Isuzu"]]];
+        var carsFlat = cars.flat(Infinity);
+        var carrakosFlat = carrakos.flat(Infinity);
+
+        var buddies = [
+            { firstName: "Chuck", lastName: "Norris", car: "Honda" },
+            { firstName: "Yakie", lastName: "Chang", car: "BMW" },
+            { firstName: "Bruce", lastName: "Lee", car: "Honda" },
+            { firstName: "Steven", lastName: "Seagal", car: "Lada" }];
+
+        //Alguien sabe hacer una lista única de coches con los dos arrays (sin repeticiones)?
+        let listaUnica = [...cars.flat(Infinity), ...carrakos.flat(Infinity)].filter((car, index, arr) => arr.find((c, i) => c === car && i < index) === undefined);
+
+        console.log("Ejer 1: " + listaUnica);
+
+        //Otra solución
+        var result = [];
+        carsFlat.map(e => {
+            if (result.filter(r => r == e).length == 0) {
+                result.push(e);
+            }
+        });
+        carrakosFlat.map(e => {
+            if (result.filter(r => r == e).length == 0) {
+                result.push(e);
+            }
+        });
+        console.log("Ejer 1.1: " + result);
+
+
+        //Alguien sabría decirme los coches de carrakos que no estén en cars?
+        var result2 = carrakosFlat.map(k => {
+            let esta = carsFlat.find(c => c == k);
+            if (esta == undefined) {
+                return k;
+            }
+        }).filter(e => e != undefined);
+
+        console.log("Ejer 2: " + result2);
+
+
+        //-Nombre y apellidos de los buddies que usan un Honda
+        console.log("Ejer 3: ");
+        buddies.map(b => {
+            if (b.car == "Honda") {
+                console.log(b.firstName + " " + b.lastName);
+            }
+        });
+
+        //otra solución
+        let result3 = buddies.filter(e => e.car == "Honda").map(b => " " + b.firstName + " " + b.lastName);
+        console.log("Ejer 3.1:" + result3);
+
+        //-Marcas utilizadas por los buddies
+        let result4 = buddies.map(e => e.car).filter((car, i, arr) => arr.find((c, j) => c == car && j < i) === undefined);
+        console.log("Ejer 4: " + result4);
+
+        //-Marcas no utilizadas por los buddies.
+        let result5 = carrakosFlat.map(k => {
+            let aux = buddies.map(e => e.car).find(c => c == k);
+            if (aux == undefined) {
+                return k;
+            }
+        }).filter(e => e != undefined);
+        console.log("Ejer 5: " + result5);
+
+        //-Cuantas marcas han sido utilizadas
+        let result6 = [];
+        buddies.map(e => {
+            if(result6.filter(r => r == e.car).length == 0){
+                result6.push(e.car);
+            }
+        })
+        
+
+
+        //-Cuantas marcas no han sido utilizadas
+
+
+    </script>
+</body>
+
+</html>
