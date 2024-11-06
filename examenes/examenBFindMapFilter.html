@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>retos JavaScript</h1>
+    <script>
+        var ciudades = ["Sevilla", "Vigo", "Leon", ["Caceres",
+            "Marbella", ["Algatocin", "Mijas", "Estepona"], "LosBarrios"]];
+
+        var ciudadakas = ["Chevrolet", "Gaucin", "Leon", ["Caceres",
+            "SanRoque", ["Algatocin", "Mijas", "Algeciras"],
+            "LosBarrios"], ["LaLinea", "Mijas", "LasRozas", ["Majadahonda",
+                "Boadilla", "Mostoles"]]];
+
+        var newciudades = ["Sevilla", "Vigo", "Leon", ["Caceres",
+            "Marbella", ["Algatocin", "Vigo", "Estepona"], "LosBarrios", "Vigo"]];
+
+        var coleguillas = [{
+            firstName: "Jonny", lastName: "Rambo",
+            car: "Leon"
+        }, {
+            firstName: "Arnold", lastName: "Suarchenager",
+            car: "Caceres"
+        }, {
+            firstName: "Chuck", lastName: "Norris",
+            car: "Caceres"
+        }, {
+            firstName: "Yakie", lastName: "Chang",
+            car: "Leon"
+        }, {
+            firstName: "Bruce", lastName: "Lee",
+            car: "Caceres"
+        }, {
+            firstName: "Steven", lastName: "Seagal",
+            car: "Estepona"
+        }];
+
+        let maleficas = ["Caceres", "Estepona"];
+
+        //Aplano los arrays
+        var ciudadesFlat = ciudades.flat(Infinity);
+        var newciudadesFlat = newciudades.flat(Infinity);
+
+        //EJERCICIO 1
+        //Ver si una ciudad es trendy. Una ciudad es trendy si esta es utilizada por más de
+        //un coleguilla. Crea en este mismo ejercicio un array trendy con dichas ciudades. Muestra el
+        //array trendy por consola. Se pide que lo realices en 3-4 líneas de código. (3 PUNTOS)
+
+        let trendys = ciudadesFlat.filter(c => {
+            if (coleguillas.filter(e => e.car == c).length > 1) {
+                return c;
+            }
+        });
+        console.log(trendys);
+
+
+        //EJERCICIO 2
+        //Muestra por consola las ciudades del array newciudades que gusten a los
+        //coleguillas, que están obviamente en newciudades pero que no estén en el array maléficas.
+        //Muestra el resultado por consola. Puede aparecer alguna ciudad repetida (no importa).
+        //Realiza este programa en una línea de código. (3 PUNTOS)
+
+        console.log(newciudadesFlat.filter(e => {
+            let mal = maleficas.find(m => m == e);
+            if (mal == undefined) {
+                return e;
+            }
+        }).filter(l => {
+            let love = coleguillas.find(c => c.car == l);
+            if (love != undefined) {
+                return l;
+            }
+        }));
+
+
+        //EJERCICIO 3
+        //Se quiere conocer la ciudad más trendy de todas usada por los coleguillas (la
+        //más preferida). Realiza este programa en 2 líneas de código. (2,5 PUNTOS)
+
+        
+        /*console.log(ciudadesFlat.filter(c => {
+            if (coleguillas.filter(e => e.car == c).length > 1) {
+                return c;
+            }
+        }).find(m => {
+            
+            if(coleguillas.filter(v => v == m) != undefined){
+                
+            }
+
+        }));*/
+
+        //No me sale :(
+
+
+        //EJERCICIO 4
+        //¿Cuántas veces aparece la palabra Vigo en newciudades en una línea? (1,5 PUNTOS)
+
+        console.log("Veces que aparece Vigo en newciudades: " + newciudadesFlat.filter(c => c == "Vigo").length);
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var godosJSON = '{"reyesgodos":[{"nombre":"Alarico","hijos":["Atanagildo","Recesvinto","Leovigildo"]},{"nombre":"RecaredoI","hijos":["Sisebuto","RecaredoII"]},{"nombre":"Suintila","hijos":["Chindasvinto","Recesvinto","Wamba","Égica","Witiza","Rodrigo"]}]}  ';
+
+        let godos = JSON.parse(godosJSON).reyesgodos;
+
+        //Nombre del padre de los godos que se llamen Recesvinto
+        let godo1 = godos.filter(e => e.hijos.find(h => h == "Recesvinto")).map(n => n.nombre);
+
+        console.log(godo1);
+
+        //Nombre del padre de los godos que se llamen Recesvinto y que no tengan un hijo llamado Leovigildo
+
+        
+        let arr =[1,2,3,21,1,1,2,45];
+        let cuantos = 0;
+        let numero = undefined;
+
+        arr.map(e=>{
+            let c = arr.filter(f => f == e).length
+            if (c>cuantos) {
+                cuantos = c;
+                numero = e;
+            }
+        })
+        console.log(numero + " aparece " + cuantos + " veces");
+
+
+    </script>
+</body>
+
+</html>

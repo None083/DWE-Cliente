@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*Me sabrías decir de este array cuales son los reyes de generación PAR:*/
+        const REYES = ["Chindatore", ["Chindasvinto", "Rencesvinto", "Lautaro"], ["Lauro", "Sisebuto", ["Fracisbuto", "Vigafredo", ["Leovigildo", "Recaredo"]]], "Amalarico II"];
+
+        /*Se supone que si un elemento es un subarray es la siguiente generación. Por ejemplo [A,[B]]
+        A es de primera generación
+        B es de segunda generación
+        
+        En este caso mostraría B*/
+
+        var buscaReyes = (arr, cont) => {
+            arr.map(e => {
+                if(Array.isArray(e)){
+                    //llama a la funcion con el elemento y cont++
+                    return buscaReyes(e , cont + 1);
+                }else{
+                    //muestra el rey y dice que es de la generación cont
+                    console.log(e + " generación: " + cont);
+                }
+            })
+        }
+
+        buscaReyes(REYES, 1);
+
+
+
+        var buscaReyes2 = (arr, esPar) => {
+            arr.map(e => {
+                if(Array.isArray(e)){
+                    //llama a la funcion con el elemento y cont++
+                    return buscaReyes2(e , !esPar);
+                }else{
+                    //muestra el rey y dice que es de la generación cont
+                    if (esPar) {
+                        console.log("El rey " + e + " es de la generación par");
+                    }
+                    
+                }
+            })
+        }
+
+        buscaReyes2(REYES, false);
+
+    </script>
+</body>
+
+</html>

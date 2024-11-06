@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //Ejercicio 1. De los siguientes arrays:
+        let array1 = [5, 12, 8, 130, 44];
+        let array2 = [5, 8, 130, 44];
+        /*Se piden los elementos del array 1 mayor de 10 pero que estén en el segundo array
+        Saldría el 130 y 44
+        Solamente puede utilizar funciones map, find y filter de arrays. No puede utilizar if, for o while.
+        Tiene que hacer el recuento solamente en una línea de código.*/
+
+        let found = array1.filter(e => e > 10 && e == array2.find(f => e == f));
+        console.log(found);
+
+        //Ejercicio 3. De los siguientes arrays:
+        array1 = [5, 12, 8, 130, 44];
+        array2 = [5, 8, 130, 44];
+        let array3 = [5, 8, 44];
+
+        /*Se piden los elementos del array 1 mayor de 10 pero que estén en el segundo array y no en el tercero.
+        Saldría el 130.
+        Solamente puede utilizar funciones map, find y filter de arrays. No puede utilizar if, for o while.*/
+
+        
+
+
+    </script>
+</body>
+
+</html>
