@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //Me sabrías decir de este array cual es la última generación:
+        const REYES = ["Chindatore", ["Chindasvinto", "Rencesvinto",["Witiza",["Oswaldo"]], "Lautaro"], ["Lauro", "Sisebuto", ["Fracisbuto", "Vigafredo", ["Leovigildo", "Recaredo"]]], "Amalarico II"];
+
+        //Se supone que si un elemento es un subarray es la siguiente generación.Por ejemplo[A, [B]]
+        //A es de primera generación
+        //B es de segunda generación
+
+        //El resultado sería 2
+
+        const buscarUltima = (arr, gen) => {
+            let maxgen = gen;
+            arr.map(e => {
+                if (Array.isArray(e)) {
+                    let aux = buscarUltima(e, gen + 1);
+                    if (aux > maxgen) {
+                        maxgen = aux;
+                    }
+                }
+            })
+            return maxgen;
+        }
+        console.log(buscarUltima(REYES, 1));
+
+
+        const mostrarUltima = (arr, gen, ultGen) => {
+            arr.map(e => {
+                if (Array.isArray(e)) {
+                    mostrarUltima(e, gen + 1, ultGen);
+                } else {
+                    if (gen == ultGen) {
+                        console.log(e);
+                    }
+                }
+            })
+        }   
+        mostrarUltima(REYES, 1, buscarUltima(REYES, 1));
+
+
+        const mostrarUltima2 = (arr, gen, ultGen) => {
+            let godos = [];
+            arr.map(e => {
+                if (Array.isArray(e)) {
+                    godos.push(...mostrarUltima2(e, gen + 1, ultGen));
+                } else {
+                    if (gen == ultGen) {
+                        godos.push(e);
+                    }
+                }
+            })
+            return godos;
+        }
+        console.log(mostrarUltima2(REYES, 1, buscarUltima(REYES, 1)));
+    </script>
+</body>
+
+</html>

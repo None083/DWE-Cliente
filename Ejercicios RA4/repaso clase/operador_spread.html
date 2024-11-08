@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const suma = (a, b, c) => {
+            return a + b + c;
+        }
+
+        const numeros1 = [1, 2, 3];
+        console.log(suma(...numeros1));
+
+        const numeros2 = [4, 5, 6];
+        let numeros3 = [...numeros1, ...numeros2];
+        console.log(numeros3);
+
+        let persona1 = {
+            nombre: "Dimas", edad: 9
+        }
+
+        let persona2 = {
+            nombre: "Emma", edad: 20
+        }
+
+        let clon = { ...persona1 }
+        persona1.nombre = "DIMAS";
+        console.log(clon);
+
+        let ambos = { ...persona1, ...persona2 };
+        console.log(ambos);
+
+    </script>
+</body>
+
+</html>
