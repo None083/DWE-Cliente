@@ -1,15 +1,29 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <script>
-        let array = [Maria, Alicia, Alicia, Lorena, Juan, Francisco, Alicia, Juan];
+        let array = ["Maria", "Alicia", "Alicia", "Lorena", "Juan", "Francisco", "Alicia", "Juan"];
+        //¿Serías capaz en un array de nombres de localizar la persona más popular?
 
-        console.log(array.find(p=> ));
+        let numVeces = 0;
+        let result = "";
+
+        array.map(e => {
+            let v = array.filter(n => n == e).length;
+            if (v > numVeces) {
+                result = e;
+                numVeces = v;
+            }
+        })
+        console.log("El nombre más popular es: " + result + ", que aparece: " + numVeces + " veces");
     </script>
 </body>
+
 </html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge 2</title>
+</head>
+<body>
+    <script>
+        let array = ["Maria", "Alicia", "Alicia", "Lorena", "Juan", "Francisco", "Alicia", "Juan", "Juan", "Maria"];
+        //¿Serías capaz en un array de nombres de localizar las TRES personas más populares?
+
+        let persona1 = "";
+        let persona2 = "";
+        let persona3 = "";
+        let numVeces1 = "";
+        let numVeces2 = "";
+        let numVeces3 = "";
+
+        array.map(n=>{
+            let veces = array.filter(p => p==n).length;
+            if (n != persona1 && veces > numVeces1) {
+                persona3 = persona2;
+                numVeces3 = numVeces2;
+                persona2 = persona1;
+                numVeces2 = numVeces1;
+                persona1 = n;
+                numVeces1 = veces;
+            }else if(n != persona2 && n != persona1 && veces > numVeces2){
+                persona3 = persona2;
+                numVeces3 = numVeces2;
+                persona2 = n;
+                numVeces2 = veces;
+            }else if(n != persona3 && n != persona2 && n != persona1 && veces > numVeces3){
+                persona3 = n;
+                numVeces3 = veces;
+            }
+        })
+
+        console.log("Las tres personas más populares son: " + persona1 + ", " + persona2 + ", " + persona3);
+    </script>
+</body>
+</html>
