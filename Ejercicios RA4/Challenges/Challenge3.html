@@ -7,7 +7,16 @@
 </head>
 <body>
     <script>
-        
+        //Crea un array que contenga 100 números aleatorios del uno al 1000, pero que no se repita ninguno.
+        let arrayUnico = [];
+        while (arrayUnico.length < 100) {
+            let numRandom = Math.floor(Math.random() * 1000) + 1;
+            let existe = arrayUnico.find(n => n == numRandom);
+            if (!existe) {
+                arrayUnico.push(numRandom);
+            }
+        }
+        console.log(arrayUnico);
     </script>
 </body>
 </html>
