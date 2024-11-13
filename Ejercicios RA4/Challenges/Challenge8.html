@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge 8</title>
+</head>
+
+<body>
+    <script>
+        //Me sabrías decir de este array cuales son los reyes de última generación:
+        const REYES = ["Chindatore", ["Chindasvinto", "Rencesvinto", "Lautaro"], ["Lauro", "Sisebuto", ["Fracisbuto", "Vigafredo", ["Leovigildo", "Recaredo"]]], "Amalarico II"];
+
+        let ultGeneracion = (array = REYES, gen = 1) => {
+            let maxGen = gen;
+            array.map(e => {
+                if (Array.isArray(e)) {
+                    let aux = ultGeneracion(e, gen + 1);
+                    if (aux > maxGen) {
+                        maxGen = aux;
+                    }
+                }
+            })
+            return maxGen;
+        }
+        console.log("La máxima generación es: " + ultGeneracion());
+
+        function reyesUltGen(array, gen, maxGen) {
+            array.map(e => {
+                if (Array.isArray(e)) {
+                    reyesUltGen(e, gen + 1, maxGen);
+                }
+                if (gen == maxGen) {
+                    console.log(e);
+                }
+            })
+        }
+        reyesUltGen(REYES, 1, ultGeneracion());
+
+    </script>
+</body>
+
+</html>
