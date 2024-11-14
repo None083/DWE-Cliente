@@ -14,8 +14,18 @@
         var vikings = '{"vikingos":[{"reino":"Noruega","reyes":["Hakon","Harald",["Ivar",["Olaf","Lars","Lasse"],"Bjorn"],"Ragnar"]},{"reino":"Dinamarca","reyes":["Frodo","Hamming",["Angantyr","Sarunas"],"Horik"]}]}';
         let viks = JSON.parse(vikings);
 
-        
-
+        let esRey = (array, nombre) => {
+            return array.map(e => e.reyes).find(reyes => {
+                return reyes.find(r => {
+                    if (Array.isArray(r)) {
+                        return esRey([{ reyes: r }], nombre);
+                    } else {
+                        return r === nombre;
+                    }
+                }) !== undefined;
+            }) !== undefined;
+        };
+        console.log(esRey(viks.vikingos, "Ivar"));
 
     </script>
 </body>
