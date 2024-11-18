@@ -42,6 +42,52 @@
         <li>pera</li>
         <li>limon</li>
     </ul>
+    <script>
+
+        const lista1 = document.getElementById("lista1");
+        const lista2 = document.getElementById("lista2");
+
+        function listaToArray(lista) {
+            let arrayLista1 = [];
+            for (let i = 0; i < lista.children.length; i++) {
+
+                if (lista.children[i].tagName == "LI") {
+                    arrayLista1.push(lista.children[i].innerHTML);
+                } else {
+                    arrayLista1.push(listaToArray(lista.children[i]));
+                }
+            }
+            return arrayLista1;
+        }
+
+        let arrayLista1 = listaToArray(lista1).flat(Infinity);
+        console.log(arrayLista1);
+        let arrayLista2 = listaToArray(lista2).flat(Infinity);
+        console.log(arrayLista2);
+
+        let array3 = [];
+
+        arrayLista1.map(e => {
+            let estaLista2 = false;
+            let repetidoLista3 = false;
+            arrayLista2.map(f => {
+                if (f.toUpperCase() == e.toUpperCase()) {
+                    estaLista2 = true;
+                }
+            })
+            array3.map(g => {
+                if (g.toUpperCase() == e.toUpperCase()) {
+                    repetidoLista3 = true;
+                }
+            })
+            if (estaLista2 && !repetidoLista3) {
+                array3.push(e.toUpperCase());
+            }
+        })
+
+        console.log(array3.sort());
+
+    </script>
 </body>
 
 </html>

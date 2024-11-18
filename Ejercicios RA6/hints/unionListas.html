@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    PRIMERA LISTA:
+    <ul id="lista1">
+        <li>manzana</li>
+        <li>pera</li>
+        <ul>
+            <li>conferencia</li>
+            <ul>
+                <li>conferenciaverde</li>
+                <li>conferenciaamarilla</li>
+                <li>conferenciaroja</li>
+            </ul>
+            <li>peradeagua</li>
+            <li>peritadulce</li>
+            <ul>
+                <li>Dimas</li>
+                <li>Gestas</li>
+                <li>Malakatos</li>
+                <li>Jose</li>
+            </ul>
+        </ul>
+        <li>limon</li>
+        <li>limon</li>
+        <li>LIMON</li>
+    </ul>
+    Segunda lista:
+    <ul id="lista2">
+        <li>manzana</li>
+        <li>manzana</li>
+        <ul>
+            <li>manzana</li>
+            <li>manzana</li>
+        </ul>
+        <li>pera</li>
+        <li>limon</li>
+        <li>Kiwi</li>
+    </ul>
+    Tercera lista:
+    <ol id="lista3">
+    </ol>
+    <script>
+        let lista1 = Array.from(document.getElementById("lista1").children);
+        let listaToArray = (lista) => {
+            let array = [];
+            lista.map(e => {
+                if (e.tagName == "UL") {
+                    array.push(listaToArray(Array.from(e.children)));
+                } else {
+                    array.push(e.innerHTML);
+                }
+            });
+            return array;
+        }
+        console.log(listaToArray(lista1));
+
+        let lista2 = Array.from(document.getElementById("lista2").children);
+        let array2 = [];
+        let listaToArray2 = (lista, array) => {
+            lista.map(e => {
+                if (e.tagName == "UL") {
+                    listaToArray2(Array.from(e.children), array);
+                } else {
+                    array.push(e.innerHTML);
+                }
+            });
+        }
+        listaToArray2(lista2, array2);
+        console.log(array2);
+
+        let array1 = [];
+        listaToArray2(lista1, array1);
+
+        let array3 = [];
+        let arrayUnico = (array1, array2, array3) => {
+            array1.map(e => {
+                if (array3.find(v => v.toUpperCase() == e.toUpperCase()) == undefined) {
+                    array3.push(e);
+                }
+            })
+            array2.map(e => {
+                if (array3.find(v => v.toUpperCase() == e.toUpperCase()) == undefined) {
+                    array3.push(e);
+                }
+            })
+        }
+        arrayUnico(array1, array2, array3);
+        console.log(array3);
+
+        let ul = document.getElementById("lista3");
+        array3.map(e=>{
+            let li = document.createElement("li");
+            li.innerHTML = e;
+            ul.appendChild(li);
+        })
+        
+    </script>
+</body>
+
+</html>
