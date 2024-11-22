@@ -1,0 +1,41 @@
+ <!DOCTYPE html>
+ <html lang="es">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejer 5</title>
+    <style>
+        p#mensaje{
+            margin: 20px;
+            visibility: hidden;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        function myFunction(idioma) {
+            var mensaje = document.getElementById("mensaje");
+            var setVisible = mensaje.style.visibility = "visible";
+            if (idioma == "ruso") {
+                mensaje.innerHTML = "Добро пожаловать";
+                mensaje.style.color = "red";
+                setVisible;
+            } else if(idioma == "español"){
+                mensaje.innerHTML = "Bienvenido";
+                mensaje.style.color = "green";
+                setVisible;
+            } else{
+                mensaje.innerHTML = "Wellcome";
+                mensaje.style.color = "blue";
+                setVisible;
+            }
+        }
+    </script>
+ </head>
+ <body>
+    <p id="mensaje">Mensaje</p>
+    <button type="button" onclick="myFunction('ruso')">Ruso</button>
+    <button type="button" onclick="myFunction('español')">Español</button>
+    <button type="button" onclick="myFunction('ingles')">Inglés</button>
+ </body>
+ </html>
