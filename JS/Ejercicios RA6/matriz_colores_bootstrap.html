@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Botones de Colores</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-5">
+    <div id="matrizBotones" class="row"></div>
+  </div>
+
+  <!-- Bootstrap JS (opcional, para interacciones) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  <script>
+    const arrayColores = [
+      ['azul', 'rojo', 'verde', 'amarillo', 'azul', 'rojo', 'verde', 'amarillo', 'azul'],
+      ['amarillo', 'verde', 'rojo', 'verde', 'amarillo', 'azul', 'rojo', 'amarillo', 'azul'],
+      ['verde', 'amarillo', 'rojo', 'azul', 'amarillo', 'verde', 'azul', 'verde', 'rojo'],
+      ['amarillo', 'rojo', 'verde', 'verde', 'rojo', 'amarillo', 'azul', 'rojo', 'verde'],
+      ['rojo', 'verde', 'amarillo', 'amarillo', 'verde', 'rojo', 'azul', 'rojo', 'verde'],
+      ['verde', 'rojo', 'amarillo', 'rojo', 'amarillo', 'verde', 'azul', 'verde', 'amarillo'],
+      ['amarillo', 'azul', 'verde', 'rojo', 'rojo', 'amarillo', 'verde', 'azul', 'rojo'],
+      ['rojo', 'verde', 'azul', 'amarillo', 'verde', 'rojo', 'amarillo', 'verde', 'azul'],
+      ['verde', 'amarillo', 'rojo', 'azul', 'amarillo', 'azul', 'rojo', 'verde', 'amarillo']
+    ];
+
+    const colorClasses = {
+      'azul': 'btn-primary',
+      'rojo': 'btn-danger',
+      'verde': 'btn-success',
+      'amarillo': 'btn-warning'
+    };
+
+    function crearBotones() {
+      const matrizBotones = document.getElementById('matrizBotones');
+      for (let i = 0; i < arrayColores.length; i++) {
+        const fila = document.createElement('div');
+        fila.classList.add('col-12', 'mb-3', 'd-flex');
+        for (let j = 0; j < arrayColores[i].length; j++) {
+          const color = arrayColores[i][j];
+          const boton = document.createElement('button');
+          boton.classList.add('btn', 'm-1', colorClasses[color]);
+          boton.textContent = color;
+          fila.appendChild(boton);
+        }
+        matrizBotones.appendChild(fila);
+      }
+    }
+
+    // Llamamos a la función para crear los botones
+    crearBotones();
+  </script>
+</body>
+</html>

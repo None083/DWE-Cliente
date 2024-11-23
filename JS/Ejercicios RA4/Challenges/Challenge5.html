@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function invertirTexto(texto) {
+            // Paso 1: Dividimos el texto en un array de palabras
+            let palabras = texto.split(" ");
+
+            // Paso 2: Invertimos cada palabra
+            for (let i = 0; i < palabras.length; i++) {
+                palabras[i] = palabras[i].split("").reverse().join("");
+            }
+
+            // Paso 3: Unimos las palabras de nuevo en un string
+            return palabras.join(" ");
+        }
+
+        // Ejemplo de uso:
+        let texto = "Buenos días hoy es lunes";
+        let resultado = invertirTexto(texto);
+        console.log(resultado);  // "soneuB saíd yoh se senul"
+
+    </script>
+</body>
+
+</html>

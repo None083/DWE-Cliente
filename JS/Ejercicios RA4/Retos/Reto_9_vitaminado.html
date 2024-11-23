@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>retos JavaScript</h1>
+    <ul id="carrakos"> </ul>
+
+    <script>
+      // Array de coches
+      let carrakos = [
+        "Chevrolet", "Tesla", "BMW",
+        ["Honda", "Infiniti", ["Lexus", "Mercedes", "Kia"], "Hyunday"],
+        ["Mazda", "Mercedes", "Jeep", ["KTM", "Nissan", "Isuzu"]]
+      ];
+      
+      // Array de personajes xungos
+      let xungos = [
+        {nombre: "Bruce Lee", carros: ["Chevrolet", "Tesla", "BMW"]},
+        {nombre: "Steven Seagal", carros: ["Mazda", "Jeep", "Nissan"]},
+        {nombre: "YakiChan", carros: ["Lexus", "Mercedes", "Kia"]}
+      ];
+      
+      // Función para buscar el dueño de un coche
+      function obtenerDueño(coche) {
+        for (let xungo of xungos) {
+          if (xungo.carros.includes(coche)) {
+            return xungo.nombre;
+          }
+        }
+        return null;  // Si no tiene dueño
+      }
+
+      // Función recursiva para recorrer carrakos y mostrar la lista de coches con o sin dueño
+      function procesarCoches(carrakos) {
+        let listaDeCoches = [];
+
+        // Recorremos carrakos
+        for (let coche of carrakos) {
+          if (Array.isArray(coche)) {
+            // Si encontramos un array, lo procesamos recursivamente
+            listaDeCoches = listaDeCoches.concat(procesarCoches(coche));
+          } else {
+            // Si el coche no tiene dueño, lo añadimos al resultado
+            let dueño = obtenerDueño(coche);
+            if (dueño) {
+              listaDeCoches.push(`${coche} - Dueño: ${dueño}`);
+            } else {
+              listaDeCoches.push(`${coche} - Sin dueño`);
+            }
+          }
+        }
+
+        return listaDeCoches;
+      }
+
+      // Mostrar la lista de coches con o sin dueño en el HTML
+      let cochesConDueño = procesarCoches(carrakos);
+
+      // Mostrar la lista en el HTML
+      let ul = document.getElementById("carrakos");
+      cochesConDueño.forEach(coche => {
+        let li = document.createElement("li");
+        li.textContent = coche;
+        ul.appendChild(li);
+      });
+
+    </script>
+</body>
+</html>
