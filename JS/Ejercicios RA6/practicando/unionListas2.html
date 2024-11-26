@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    PRIMERA LISTA:
+    <ul id="lista1">
+        <li>manzana</li>
+        <li>pera</li>
+        <ul>
+            <li>conferencia</li>
+            <ul>
+                <li>conferenciaverde</li>
+                <li>conferenciaamarilla</li>
+                <li>conferenciaroja</li>
+            </ul>
+            <li>peradeagua</li>
+            <li>peritadulce</li>
+            <ul>
+                <li>Dimas</li>
+                <li>Gestas</li>
+                <li>Malakatos</li>
+                <li>Jose</li>
+            </ul>
+        </ul>
+        <li>limon</li>
+        <li>limon</li>
+        <li>LIMON</li>
+    </ul>
+    Segunda lista:
+    <ul id="lista2">
+        <li>manzana</li>
+        <li>manzana</li>
+        <li>manzana</li>
+        <li>manzana</li>
+        <li>pera</li>
+        <li>limon</li>
+    </ul>
+    <script>
+        //Realiza un programa que muestre por consola la INTERSECCIÓN de las dos listas SIN DUPLICADOS de forma ordenada
+
+        const lista1 = document.getElementById("lista1");
+        const lista2 = document.getElementById("lista2");
+
+        var array1 = [];
+        var array2 = [];
+        var arrayFinal = [];
+
+        function listaToArray(lista, array) {
+            if (lista.nodeName == "LI") { //o tagName
+                array.push(lista.innerHTML);
+            }
+            for (let i = 0; i < lista.children.length; i++) {
+                listaToArray(lista.children[i], array);
+            }
+        }
+
+        listaToArray(document.getElementById("lista1"), array1);
+        listaToArray(document.getElementById("lista2"), array2);
+
+        let arrayUnico = (array1, array2, array3) => {
+            array1.map(e => {
+                if (array3.find(v => v.toUpperCase() == e.toUpperCase()) == undefined) {
+                    array3.push(e);
+                }
+            })
+            array2.map(e => {
+                if (array3.find(v => v.toUpperCase() == e.toUpperCase()) == undefined) {
+                    array3.push(e);
+                }
+            })
+        }
+
+        arrayUnico(array1, array2, arrayFinal);
+        console.log(arrayFinal);
+
+    </script>
+
+</body>
+
+</html>
