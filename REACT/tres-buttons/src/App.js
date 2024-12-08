@@ -21,7 +21,7 @@ class App extends Component {
       <div className="App">
         <Button color={this.state.color}>Yo cambio</Button>
         <Button color="primary" onClick={()=>this.azul()}>Azul</Button>
-        <Button color="danger">Rojo</Button>
+        <Button color="danger" onClick={()=>this.rojo()}>Rojo</Button>
       </div>
     );
   }
