@@ -7,7 +7,8 @@ class App extends Component {
     super(props);
     this.state = {
       listaColor: Array(5).fill("secondary"),
-      listaCuantos: Array(5).fill(0)
+      listaCuantos: Array(5).fill(0),
+      listaPulsado: Array(5).fill(false)
     };
   }
 
@@ -15,14 +16,54 @@ class App extends Component {
   setSeleccionado(num) {
     let listaColor2 = [...this.state.listaColor];
     let listaCuantos2 = [...this.state.listaCuantos];
-    
-    if (listaColor2[num] !== "danger") {
-      listaColor2[num] = "danger";
-      this.setState({listaColor: listaColor2});
-    }
-    listaCuantos2[num] += 1;
-    this.setState({listaCuantos: listaCuantos2});
+    let listaPulsado2 = [...this.state.listaPulsado];
+
+    this.setState({ listaCuantos: listaCuantos2 }, () => {
+      listaCuantos2[num] += 1;
+      this.cambiarColor();
+      if (listaPulsado2[num] == false) {
+        listaPulsado2[num] = true;
+        this.setState({ listaPulsado: listaPulsado2 });
+        setTimeout(() => this.cuentaRegresiva(num), 1000);
+      }
+    })
   }
+
+  cuentaRegresiva(num) {
+    let listaCuantos2 = [...this.state.listaCuantos];
+    let listaPulsado2 = [...this.state.listaPulsado];
+    if (listaCuantos2[num] > 0) {
+      listaCuantos2[num] -= 1;
+      this.setState({ listaCuantos: listaCuantos2 }, () => {
+        if (listaCuantos2[num] > 0) {
+          setTimeout(() => this.cuentaRegresiva(num), 1000);
+        }
+        this.cambiarColor();
+      })
+    }
+    if (listaCuantos2[num] == 0) {
+      listaPulsado2[num] = false;
+      this.setState({ listaPulsado: listaPulsado2 });
+    }
+  }
+
+  cambiarColor() {
+    let listaColor2 = Array(5).fill("secondary");
+    let listaCuantos2 = [...this.state.listaCuantos];
+    let numeroMayor = 0;
+    let posicionMayor = -1;
+    listaCuantos2.map((e, i) => {
+      if (e > numeroMayor) {
+        posicionMayor = i;
+        numeroMayor = e;
+      }
+    })
+    if (posicionMayor!=-1) {
+      listaColor2[posicionMayor]="primary";
+    }
+    this.setState({listaColor:listaColor2});
+  }
+
   render() {
     return (
       <div className="App">
@@ -39,6 +80,8 @@ class App extends Component {
 
 
 }
+
+
 
 function Botoncillo(props) {
   return (
