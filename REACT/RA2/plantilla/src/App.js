@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       <Button>
-        
+        Dale
       </Button>
     </div>
   );
