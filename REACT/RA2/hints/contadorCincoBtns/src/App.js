@@ -8,23 +8,32 @@ class App extends Component {
     super(props);
     this.state = {
       // DEFINE AQUÍ TU ESTADO
-      colorBtns: Array(5).fill("secondary")
+      colorBtns: Array(5).fill("secondary"),
+      contador: 0
     };
   }
 
-  cambioColor(){
-    
+  setSeleccionado(num) {
+    let colorBtnsAux = [...this.state.colorBtns];
+    if (this.state.colorBtns[num] !== "danger") {
+      colorBtnsAux[num] = "danger";
+      this.setState(e => ({
+        colorBtns: colorBtnsAux,
+        contador: e.contador + 1
+      }));
+    }
   }
 
   // RENDERIZA AQUÍ LO QUE NECESITES
   render() {
     return (
       <div className="App">
-        <Botoncillo color={this.state.colorBtns[0]} />
-        <Botoncillo color={this.state.colorBtns[1]} />
-        <Botoncillo color={this.state.colorBtns[2]} />
-        <Botoncillo color={this.state.colorBtns[3]} />
-        <Botoncillo color={this.state.colorBtns[4]} />
+        <h1>{this.state.contador}</h1>
+        <Botoncillo color={this.state.colorBtns[0]} onClick={() => this.setSeleccionado(0)} />
+        <Botoncillo color={this.state.colorBtns[1]} onClick={() => this.setSeleccionado(1)} />
+        <Botoncillo color={this.state.colorBtns[2]} onClick={() => this.setSeleccionado(2)} />
+        <Botoncillo color={this.state.colorBtns[3]} onClick={() => this.setSeleccionado(3)} />
+        <Botoncillo color={this.state.colorBtns[4]} onClick={() => this.setSeleccionado(4)} />
       </div>
     );
   }
@@ -33,7 +42,7 @@ class App extends Component {
 function Botoncillo(props) {
   return (
     // MUESTRA AQUÍ EL BOTÓN CON EL COLOR CORRESPONDIENTE
-    <Button color={props.color}></Button>
+    <Button color={props.color} onClick={props.onClick}></Button>
   );
 }
 
