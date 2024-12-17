@@ -7,34 +7,32 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      colores: Array(5).fill("secondary")
+      colores: Array(5).fill("secondary"),
+      ultimosPulsados: []
     }
   }
-  /*cambioColor(numBoton) {
-    let copia = this.state.colores;
-    if (this.state.colores[numBoton] === "secondary") {
-      copia[numBoton] = "info";
-    } else {
-      copia[numBoton] = "secondary";
-    }
-    this.setState({ colores: copia })
-  }*/
-  cambioColor2(numBoton) {
-    let colores = [...this.state.colores];
-    const botonesActivos = colores.filter(color => color === "info").length;
 
-    if (colores[numBoton] === "info") {
+  cambioColor2(numBoton) {
+    let coloresAux = [...this.state.colores];
+    let ultimosPulsadosAux = [...this.state.ultimosPulsados];
+
+    if (coloresAux[numBoton] === "info") {
       return;
     }
 
-    if (botonesActivos === 2) {
-      const indexAntiguo = colores.indexOf("info");
-      colores[indexAntiguo] = "secondary";
+    ultimosPulsadosAux.push(numBoton);
+
+    if (ultimosPulsadosAux.length > 2) {
+      const botonAntiguo = ultimosPulsadosAux.shift();
+      coloresAux[botonAntiguo] = "secondary";
     }
 
-    colores[numBoton] = "info";
+    coloresAux[numBoton] = "info";
 
-    this.setState({ colores });
+    this.setState({
+      colores:coloresAux, 
+      ultimosPulsados:ultimosPulsadosAux
+    });
   }
   render() {
     return (
