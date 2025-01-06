@@ -13,6 +13,41 @@ class App extends Component {
     };
   }
 
+  checkColor = (filaIndex, colIndex) => {
+    let copiaMatriz = [...this.state.botones];
+    let color = this.state.botones[filaIndex][colIndex];
+    
+    if (this.state.botones[filaIndex][colIndex] === "info") {
+      return;
+      
+    }
+
+    if (filaIndex > 0 && this.state.botones[filaIndex - 1][colIndex] !== "info" && this.state.botones[filaIndex - 1][colIndex] !== color) {
+      copiaMatriz[filaIndex - 1][colIndex] = color;
+      this.setState({ botones: copiaMatriz });
+      this.checkColor(filaIndex - 1, colIndex);
+    }
+
+    if (filaIndex > 0 && this.state.botones[filaIndex + 1][colIndex] !== "info" && this.state.botones[filaIndex + 1][colIndex] !== color) {
+      copiaMatriz[filaIndex + 1][colIndex] = color;
+      this.setState({ botones: copiaMatriz });
+      this.checkColor(filaIndex + 1, colIndex);
+    }
+
+    if (filaIndex > 0 && this.state.botones[filaIndex][colIndex - 1] !== "info" && this.state.botones[filaIndex][colIndex - 1] !== color) {
+      copiaMatriz[filaIndex][colIndex - 1] = color;
+      this.setState({ botones: copiaMatriz });
+      this.checkColor(filaIndex, colIndex - 1);
+    }
+
+    if (filaIndex > 0 && this.state.botones[filaIndex][colIndex + 1] !== "info" && this.state.botones[filaIndex][colIndex + 1] !== color) {
+      copiaMatriz[filaIndex][colIndex + 1] = color;
+      this.setState({ botones: copiaMatriz });
+      this.checkColor(filaIndex, colIndex + 1);
+    }
+    
+  }
+
   handleOnCambioColor(filaIndex, colIndex) {
     let botonesAux = this.state.botones.map((fila, fIndex) =>
       fila.map((color, cIndex) =>
@@ -21,6 +56,14 @@ class App extends Component {
     );
     let indiceColorAux = this.state.indiceColor < 4 ? this.state.indiceColor + 1 : 0;
     this.setState({ botones: botonesAux, indiceColor: indiceColorAux });
+
+    for (let i = 0; i < 9; i++) {
+      for (let j = 0; j < 9; j++) {
+        if (this.state.botones[i][j] !== "info") {
+          this.checkColor(i, j);
+        }
+      }
+    }
   }
 
   render() {
