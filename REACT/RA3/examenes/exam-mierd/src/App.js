@@ -17,6 +17,7 @@ class App extends Component {
   }
 
   jugar() {
+    this.setState({playable:true})
     return (
       <Botonera btnsJugables={this.state.listaBotones} />
     )
@@ -26,18 +27,21 @@ class App extends Component {
     return (
       <div className="App">
         <Button onClick={() => this.jugar()}>Jugar</Button>
-        <Tablero />
+        <Tablero playable={this.state.playable}/>
       </div>
     );
   }
 }
 
-function Tablero() {
-  let matriz = Array(8).fill(null).map(() => Array(8).fill(null));
-  for (let i = 0; i < matriz.length; i++) {
-    for (let j = 0; j < matriz[i].length; j++) {
+function Tablero(props) {
+  if (!props.playable) {
+    return;
+  }
+  let matriz = [];
+  for (let i = 0; i < 8; i++) {
+    matriz.push(<br/>);
+    for (let j = 0; j < 8; j++) {
       matriz.push(<Button outline></Button>);
-      
     }
   }
   return (matriz);
