@@ -35,7 +35,7 @@ class App extends Component {
 
 function Tablero(props) {
   if (!props.playable) {
-    return;
+    return;,
   }
   let matriz = [];
   for (let i = 0; i < 8; i++) {
