@@ -1,49 +1,54 @@
-import React, { Component } from 'react';
-import { Button } from 'reactstrap';
+import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Component } from 'react';
+import { Button } from 'reactstrap';
+
 const MapaBotones = (props) => {
   // este componente pinta el tablero 9x9 con las props que le paso.
-  let lista = [];
+  let array = [];
+
   for (let i = 0; i < 9; i++) {
     for (let j = 0; j < 9; j++) {
       if (i == 0) {
-        lista.push(<Button color={props.listaBotones[i][j]} outline onClick={()=>props.clica(i, j)} />);
-      } else {
-        if (props.listaBotones[i][j]!="secondary") {
-          lista.push(<Button color={props.listaBotones[i][j]} />);
+        array.push(<Button color={props.listaBotones[i][j]} outline onClick={()=>props.clica(i,j)} />);
+      }else{
+        if (props.listaBotones[i][j] != "secondary") {
+          array.push(<Button color={props.listaBotones[i][j]} />);
         }else{
-          lista.push(<Button color={props.listaBotones[i][j]} outline />);
+          array.push(<Button color={props.listaBotones[i][j]} outline />);
         }
-        
       }
     }
-    lista.push(<br />);
+    array.push(<br />)
   }
-  return lista;
+  return (array);
 }
+
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      listaBotones: Array(9).fill(null),
-      // no se puede modificar el state
+      listaBotones: Array(9).fill(null)
     }
   }
+
   clica = (x, y) => {
-    // x se supone que la columna, y la fila
-    let copia = this.state;
+    // x la columna, y la fila
+    console.log("llega")
+    let copiaState = this.state;
     let contador = 8;
     let encontrado = false;
-    while (contador!=0 && !encontrado) {
-      if (copia.listaBotones[contador][y] == "secondary") {
-        copia.listaBotones[contador][y] = "primary";
+
+    while (contador != 0 && !encontrado) {
+      if (copiaState.listaBotones[contador][y] == "secondary") {
+        copiaState.listaBotones[contador][y] = "primary";
         encontrado = true;
       }
-      contador--;
+      contador --;
     }
-    this.setState({copia});
+    this.setState({copiaState})
   }
-  
+
   componentWillMount() {
     // aquí es donde creo las nueve columnas con los datos iniciales.
     let copiaListaBotones = this.state.listaBotones;
@@ -56,11 +61,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1> BUCHACA </h1>
         <MapaBotones listaBotones={this.state.listaBotones} clica={this.clica} />
       </div>
     );
   }
 
 }
+
 export default App;
