@@ -18,56 +18,52 @@ class App extends Component {
     return Math.round(Math.random() * horquilla + min);
   }
 
-  jugar (){
-    this.mostrarBotones();
+  jugar() {
     this.setState({ playable: true });
   }
 
-  componentWillMount(){
+  componentWillMount() {
     let tableroNumeros = this.state.listaNumeros;
     for (let i = 0; i < 9; i++) {
       for (let j = 0; j < 9; j++) {
         tableroNumeros.push(this.aleatorio(1, 9))
       }
     }
-    this.setState({listaNumeros:tableroNumeros});
-  }
-
-  mostrarBotones(){
-    let tableroBotones = this.state.listaBotones;
-    for (let x = 0; x < 9; x++) {
-      for (let y = 0; y < 9; y++) {
-        tableroBotones[x][y].push(<Button onClick={()=>this.clicar(x, y)}></Button>);
-      }
-      tableroBotones[x].push(<br />);
-    }
-    this.setState({listaBotones:tableroBotones});
+    this.setState({ listaNumeros: tableroNumeros });
   }
 
   clicar(i, j) {
     let tableroNumeros = this.state.listaNumeros;
     let tableroBotones = this.state.listaBotones;
     tableroBotones[i][j] = <Button color='primary'>{tableroNumeros[i][j]}</Button>;
-    this.setState({listaBotones:tableroBotones});
+    this.setState({ listaBotones: tableroBotones });
   }
 
   render() {
     return (
       <div className="App">
-        <Button onClick={() => this.jugar()}>Jugar</Button><br/>
-        <Botones listaBotones={this.state.listaBotones} playable={this.state.playable}/>
+        <Button onClick={() => this.jugar()}>Jugar</Button><br />
+        <Botones listaBotones={this.state.listaBotones} playable={this.state.playable} />
       </div>
     );
   }
 
 }
 
-function Botones(props){
+function Botones(props) {
   if (!props.playable) {
     return;
   }
-  
-  return(props.listaBotones);
+
+  let tableroBotones = Array(9).fill(Array(9).fill(null));
+  for (let x = 0; x < 9; x++) {
+    for (let y = 0; y < 9; y++) {
+      tableroBotones[x][y]=<Button ></Button>;
+    }
+    tableroBotones[x][9]= <br />;
+  }
+
+  return (tableroBotones);
 }
 
 export default App;
