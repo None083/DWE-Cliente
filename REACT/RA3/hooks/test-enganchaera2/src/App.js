@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 
-class App extends Component() {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,9 +23,88 @@ class App extends Component() {
     }
   }
 
+  handleRespuesta = (respuesta, index) => {
+    let respSi = this.state.respuestasSi;
+    if (respuesta === 'si') {
+      respSi += 1;
+    }
+    const nuevasPreguntas = this.state.preguntas.filter((_, i) => i !== index);
+    this.setState({preguntas: nuevasPreguntas, respuestasSi: respSi});
+  };
+
+  calcularResultado() {
+    let resultado = "";
+
+    if (this.state.respuestasSi <= 4) {
+      resultado = <div className="alert alert-success mt-4">
+        <h4>Resultado:</h4>
+        <p>Tu puntuación es de {this.state.respuestasSi}.</p>
+        <p>En principio no tienes nada de que preocuparte.</p>
+      </div>;
+    } else if (this.state.respuestasSi <= 6) {
+      resultado = <div className="alert alert-primary mt-4">
+        <h4>Resultado:</h4>
+        <p>Tu puntuación es de {this.state.respuestasSi}.</p>
+        <p>Empiezas a tener signos de dependencia del móvil. Puedes utilizar técnicas como apagar el móvil cuando no lo necesitas, cuando duermes, etc.</p>
+      </div>;
+    } else if (this.state.respuestasSi <= 8) {
+      resultado = <div className="alert alert-warning mt-4">
+        <h4>Resultado:</h4>
+        <p>Tu puntuación es de {this.state.respuestasSi}.</p>
+        <p>Tienes una gran dependencia del móvil. Deberías seguir un plan de «desintoxicación» del móvil como por ejemplo dejar el móvil en casa cuando vas a comprar, apagarlo durante la noche, apagarlo durante horas de clase o trabajo, etc.</p>
+      </div>;
+    } else {
+      resultado = <div className="alert alert-danger mt-4">
+        <h4>Resultado:</h4>
+        <p>Tu puntuación es de {this.state.respuestasSi}.</p>
+        <p>Tus síntomas de dependencia son muy preocupantes. Además de todas las técnicas de los apartados anteriores deberías plantearte un plan de desintoxicación del móvil que consista en estar una o dos semanas sin utilizarlo. Si ves que no puedes hacerlo por ti mismo, pide ayuda a un profesional. </p>
+      </div>;
+    }
+
+    return resultado;
+  }
+
   render() {
     return (
-      <></>
+      <div className="App p-4">
+        <h1>Test nomofobia</h1>
+        <Form>
+          {this.state.preguntas.map((pregunta, index) => (
+            <FormGroup
+              tag="fieldset"
+              key={index}
+              className="p-3 mb-3 border rounded bg-light"
+            >
+              <legend style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '10px' }}>
+                {pregunta}
+              </legend>
+              <div style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
+                <Input
+                  type="radio"
+                  name={`pregunta-${index}`}
+                  onClick={() => this.handleRespuesta('si', index)}
+                  style={{ marginRight: '5px' }}
+                />
+                <Label check style={{ marginBottom: '0' }}>
+                  Sí
+                </Label>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <Input
+                  type="radio"
+                  name={`pregunta-${index}`}
+                  onClick={() => this.handleRespuesta('no', index)}
+                  style={{ marginRight: '5px' }}
+                />
+                <Label check style={{ marginBottom: '0' }}>
+                  No
+                </Label>
+              </div>
+            </FormGroup>
+          ))}
+        </Form>
+        {this.state.preguntas.length === 0 && (this.calcularResultado())}
+      </div>
     )
   }
 }
