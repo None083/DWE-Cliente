@@ -1,38 +1,26 @@
-import React, { useState } from 'react';
-import {
-    Navbar,
-    NavbarBrand,
-    NavLink,
-    Button,
-} from 'reactstrap';
-export default function Menu(props) {
+import React from 'react';
+import { Navbar, NavbarBrand, Nav, NavItem, Button } from 'reactstrap';
 
-    let colorUno = 'secondary'
-    let colorDos = 'secondary'
-    let colorTres = 'secondary'
-    switch (props.menuItem) {
-        case 'UNO':
-            colorUno = 'primary'
-            break;
-        case 'DOS':
-            colorDos = 'primary'
-            break;
-        case 'TRES':
-            colorTres = 'primary'
-            break;
-        default:
-            break;
-    }
-    return (
-        <div>
-            <Navbar>
-                <NavbarBrand href="/">MYFPSCHOOL</NavbarBrand>
-                <NavLink>
-                    <Button color={colorUno} >UNO</Button>{" "}
-                    <Button color={colorDos} >DOS</Button>{" "}
-                    <Button color={colorTres} >TRES</Button>
-                </NavLink>
-            </Navbar>
-        </div>
-    );
+export default function Menu({ menuItem, changeMenu }) {
+  const menuItems = ['UNO', 'DOS', 'TRES'];
+
+  return (
+    <Navbar color="light" light expand="md" className="shadow">
+      <NavbarBrand href="/" className="fw-bold">
+        MYFPSCHOOL
+      </NavbarBrand>
+      <Nav className="me-auto" navbar>
+        {menuItems.map((item) => (
+          <NavItem key={item} className="me-2">
+            <Button
+              color={menuItem === item ? 'primary' : 'secondary'}
+              onClick={() => changeMenu(item)}
+            >
+              {item}
+            </Button>
+          </NavItem>
+        ))}
+      </Nav>
+    </Navbar>
+  );
 }
