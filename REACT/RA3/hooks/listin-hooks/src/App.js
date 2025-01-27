@@ -15,7 +15,7 @@ const Altas = (props) => {
     }
 
     // Intentar agregar el contacto y verificar si se agregó correctamente
-    const agregado = props.agregarContacto({ nombre, apellidos, telefono });
+    const agregado = props.agregarContacto({ nombre: nombre, apellidos: apellidos, telefono: telefono });
     if (agregado) {
       setNombre("");
       setApellidos("");
