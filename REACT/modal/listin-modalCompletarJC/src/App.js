@@ -21,8 +21,9 @@ const VentanaModalListin = (props) => {
   const {
     className
   } = props;
-  const [nombre, setNombre] = useState(undefined);
-  const [telefono, setTelefono] = useState(undefined);
+  const [nombre, setNombre] = useState("");
+  const [telefono, setTelefono] = useState("");
+  const [mensaje, setMensaje] = useState("");
 
   const handleChange = (event) => {
     if (event.target.name == "nombre") {
@@ -34,10 +35,15 @@ const VentanaModalListin = (props) => {
 
   }
   const click = () => {
-    props.insertaPersona(nombre, telefono)
-    setNombre(undefined)
-    setTelefono(undefined)
-    props.toggle();
+    if (props.listaUsuarios.find(u => u.telefono === telefono) !== undefined) {
+      setMensaje("No puedes guardar un nuevo contacto con un teléfono existente.")
+    } else {
+      props.insertaPersona(nombre, telefono)
+      setNombre("")
+      setTelefono("")
+      setMensaje("")
+      props.toggle();
+    }
   }
 
   return (
@@ -66,6 +72,7 @@ const VentanaModalListin = (props) => {
                 name="telefono"
                 type="Text" />
             </Col>
+            <span id="mensaje" name="mensaje">{mensaje}</span>
           </FormGroup>
 
 
@@ -111,6 +118,7 @@ class App extends Component {
   insertaPersona(n, t) {
     let p = this.state.listaUsuarios;
     let newp = { nombre: n, telefono: t };
+
     p.push(newp);
     this.setState({ listaUsuarios: p });
   }
@@ -121,6 +129,7 @@ class App extends Component {
         <Mostrar elementos={this.state.listaUsuarios} borrarUsuario={this.borrarUsuario} />
         <Button color="primary" onClick={() => { this.toggleModal() }}> Alta Usuario </Button>
         <VentanaModalListin
+          listaUsuarios={this.state.listaUsuarios}
           insertaPersona={(nombre, telefono) => this.insertaPersona(nombre, telefono)}
           mostrar={this.state.isOpen}
           toggle={() => this.toggleModal()}
