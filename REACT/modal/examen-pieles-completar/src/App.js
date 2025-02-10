@@ -1,5 +1,5 @@
 import { Component, useState } from "react";
-import { Card, CardBody, CardText, CardTitle, Modal, ModalHeader, ModalBody, ModalFooter, Button, FormGroup, Label, Col, Input } from "reactstrap";
+import { Card, CardBody, CardText, CardTitle, Modal, ModalHeader, ModalBody, ModalFooter, Button, FormGroup, Label, Col, Input, CardSubtitle, ListGroup, ListGroupItem } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 export const PIELES = [
   {
@@ -80,17 +80,17 @@ const VentanaModalCarrito = (props) => {
 
   return (
     <div>
-      <Modal isOpenCarrito={props.mostrar} toggle={props.toggle} className={className} >
+      <Modal isOpen={props.mostrar} toggle={props.toggle} className={className} >
         <ModalHeader toggle={props.toggle}>CARRITO DE LA COMPRA</ModalHeader>
         <ModalBody>
           {lista}
           <Card>
             <CardBody>
-              <CardText><strong>Total:</strong> {totalPagar}</CardText>
+              <CardText><strong>Total:</strong> {totalPagar}€</CardText>
             </CardBody>
           </Card>
         </ModalBody>
-        <ModalHeader>Rellena con tus datos</ModalHeader>
+        <ModalHeader>Rellena con tus datos de envío</ModalHeader>
         <ModalBody>
           <FormGroup row>
             <Label sm={4}>Nombre:</Label>
@@ -101,18 +101,6 @@ const VentanaModalCarrito = (props) => {
                 name="nombre"
                 type="text"
                 value={formData.nombre}
-              />
-            </Col>
-          </FormGroup>
-          <FormGroup row>
-            <Label sm={4}>Apellidos:</Label>
-            <Col sm={8}>
-              <Input
-                onChange={handleChange}
-                id="apellidos"
-                name="apellidos"
-                type="text"
-                value={formData.apellidos}
               />
             </Col>
           </FormGroup>
@@ -130,8 +118,8 @@ const VentanaModalCarrito = (props) => {
           </FormGroup>
         </ModalBody>
         <ModalFooter>
-          <Button color="danger" onClick={() => props.toggle()}>PAGAR</Button>
-          <Button color="primary" onClick={() => props.toggle()}>CERRAR</Button>
+          <Button color="primary" onClick={() => props.guardarPedido()}>PAGAR</Button>
+          <Button color="secondary" onClick={() => props.toggle()}>CERRAR</Button>
         </ModalFooter>
       </Modal>
     </div>
@@ -139,17 +127,44 @@ const VentanaModalCarrito = (props) => {
 }
 
 const VentanaPedidos = (props) => {
+  let listaPedidos = props.pedidos.map(e =>
+    <Card
+      style={{
+        width: '18rem'
+      }}
+    >
+      <CardBody>
+        <CardTitle tag="h5">
+          Número: {e.numPedido}
+        </CardTitle>
+        <CardSubtitle
+          className="mb-2 text-muted"
+          tag="h6"
+        >
+          Importe: {e.importe}€
+        </CardSubtitle>
+        <strong>Productos:</strong>
+        <ListGroup flush>
+          {e.productos.map(p =>
+            <ListGroupItem>{p.producto.nombre} - {p.cantidad}</ListGroupItem>)}
+        </ListGroup>
+        <strong>Dirección de envío:</strong>
+        <CardText>
+          {e.nombre}. {e.direccion}.
+        </CardText>
+      </CardBody>
+    </Card>
+  );
   return (
     <div>
-      <Modal>
+      <Modal isOpen={props.mostrar} toggle={props.toggle}>
         <ModalHeader toggle={props.toggle}>TODOS LOS PEDIDOS</ModalHeader>
         <ModalBody>
-          <Card>
-            <CardBody>
-              <CardText>hOLA, SOY UN PEDIDO</CardText>
-            </CardBody>
-          </Card>
+          {listaPedidos}
         </ModalBody>
+        <ModalFooter>
+          <Button color="secondary" onClick={() => props.toggle()}>CERRAR</Button>
+        </ModalFooter>
       </Modal>
     </div>
   )
@@ -166,6 +181,26 @@ class App extends Component {
       }),
       isOpenCarrito: false,
       isOpenPedidos: false,
+      listaPedidos: [{
+        numPedido: 1, productos: [{
+          producto: {
+            id: 0,
+            imagen: "https://pielparaartesanos.com/cdn/shop/files/Cabra_laminada_oro.jpg",
+            nombre: "Cabra laminada oro",
+            texto: "Cabra laminada con acabado arrugado en color oro. ",
+            precio: 30
+          }, cantidad: 1
+        },
+        {
+          producto: {
+            id: 2,
+            imagen: "https://pielparaartesanos.com/cdn/shop/files/RST_420.jpg",
+            nombre: "Vacuno flor burdeos",
+            texto: "La piel de vacuno es la opción ideal para bolsos de calidad.",
+            precio: 25
+          }, cantidad: 2
+        }], importe: 80, nombre: "Juanito", direccion: "Su casa"
+      }]
     };
   }
   toggleModalCarrito() { this.setState({ isOpenCarrito: !this.state.isOpenCarrito }) }
@@ -180,6 +215,28 @@ class App extends Component {
     this.setState({ carrito: c })
     console.log(c)
   }
+
+  guardarPedido = () => {
+    let productosEnCarrito = this.state.carrito.filter(e => e.cantidad > 0);
+
+    let nuevoPedido = {
+      numPedido: this.state.listaPedidos.length + 1,
+      productos: productosEnCarrito.map(e => ({
+        producto: { ...e },
+        cantidad: e.cantidad
+      })),
+      importe: productosEnCarrito.reduce((total, e) => total + e.precio * e.cantidad, 0),
+      nombre: "Cliente",  // Puedes mejorar esto capturando datos del formulario
+      direccion: "Dirección" // Igual que arriba
+    };
+
+    this.setState(prevState => ({
+      listaPedidos: [...prevState.listaPedidos, nuevoPedido], // Agregar pedido
+      carrito: prevState.carrito.map(e => ({ ...e, cantidad: 0 })), // Vaciar carrito
+      isOpenCarrito: false // Cerrar modal del carrito
+    }));
+  };
+
 
   render() {
     let numProd = 0;
@@ -197,8 +254,13 @@ class App extends Component {
           toggle={() => this.toggleModalCarrito()}
           modificar={(p, c) => this.modificar(p, c)}
           carrito={this.state.carrito}
+          guardarPedido={this.guardarPedido}
         />
-        <VentanaPedidos toggle={() => this.toggleModalPedidos()} />
+        <VentanaPedidos
+          mostrar={this.state.isOpenPedidos}
+          toggle={() => this.toggleModalPedidos()}
+          pedidos={this.state.listaPedidos}
+        />
       </>
     );
   }
