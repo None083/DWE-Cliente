@@ -128,37 +128,38 @@ const VentanaModalCarrito = (props) => {
 
 const VentanaPedidos = (props) => {
   let listaPedidos = props.pedidos.map(e =>
-    <Table responsive>
-      <thead>
-        <tr>
-          <th>Número</th><th>Importe</th><th>Productos</th><th>Dirección de envío</th>
-        </tr>
-      </thead>
-      <tBody>
-        <tr>
-          <th scope="row">{e.numPedido}</th>
-          <td>{e.importe}€</td>
-          <td>
-            <ListGroup flush>
-              {e.productos.map(p => <ListGroupItem>{p.producto.nombre} - {p.cantidad}</ListGroupItem>)}
-            </ListGroup>
-          </td>
-          <td>
-            <ListGroup flush>
-              <ListGroupItem><strong>Nombre:</strong> {e.nombre}.</ListGroupItem>
-              <ListGroupItem><strong>Dirección postal:</strong> {e.direccion}.</ListGroupItem>
-            </ListGroup>
-          </td>
-        </tr>
-      </tBody>
-    </Table>
+
+    <tBody>
+      <tr>
+        <th scope="row">{e.numPedido}</th>
+        <td>{e.importe}€</td>
+        <td>
+          <ListGroup flush>
+            {e.productos.map(p => <ListGroupItem>{p.producto.nombre} - {p.cantidad}</ListGroupItem>)}
+          </ListGroup>
+        </td>
+        <td>
+          <ListGroup flush>
+            <ListGroupItem><strong>Nombre:</strong> {e.nombre}.</ListGroupItem>
+            <ListGroupItem><strong>Dirección postal:</strong> {e.direccion}.</ListGroupItem>
+          </ListGroup>
+        </td>
+      </tr>
+    </tBody>
   );
   return (
     <div>
       <Modal fullscreen isOpen={props.mostrar} toggle={props.toggle}>
         <ModalHeader toggle={props.toggle}>TODOS LOS PEDIDOS</ModalHeader>
         <ModalBody>
-          {listaPedidos}
+          <Table responsive>
+            <thead>
+              <tr>
+                <th>Número</th><th>Importe</th><th>Productos</th><th>Dirección de envío</th>
+              </tr>
+            </thead>
+            {listaPedidos}
+          </Table>
         </ModalBody>
         <ModalFooter>
           <Button color="secondary" onClick={() => props.toggle()}>CERRAR</Button>
@@ -166,6 +167,56 @@ const VentanaPedidos = (props) => {
       </Modal>
     </div>
   )
+}
+
+const VentanaLogin = (props) => {
+  const [formData, setFormData] = useState({
+    usuario: "",
+    password: "",
+  });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  return (
+    <div>
+      <Modal isOpen={props.mostrar} toggle={props.toggle} className={props.className}>
+        <ModalHeader toggle={props.toggle}>Acceso a la aplicación</ModalHeader>
+        <ModalBody>
+          <FormGroup row>
+            <Label sm={4}>Usuario:</Label>
+            <Col sm={8}>
+              <Input
+                onChange={handleChange}
+                id="usuario"
+                name="usuario"
+                type="text"
+                value={formData.usuario}
+              />
+            </Col>
+          </FormGroup>
+          <FormGroup row>
+            <Label sm={4}>Contraseña:</Label>
+            <Col sm={8}>
+              <Input
+                onChange={handleChange}
+                id="password"
+                name="password"
+                type="password"
+                value={formData.password}
+              />
+            </Col>
+          </FormGroup>
+        </ModalBody>
+        <ModalFooter>
+          <Button color="primary" onClick={() => props.loguear(formData.usuario, formData.password)}>ENTRAR</Button>
+          <Button color="secondary" onClick={() => props.toggle()}>CERRAR</Button>
+        </ModalFooter>
+      </Modal>
+    </div>
+  );
 }
 
 
@@ -179,6 +230,9 @@ class App extends Component {
       }),
       isOpenCarrito: false,
       isOpenPedidos: false,
+      isOpenLogin: false,
+      logueado: false,
+      usuarios: [{ usuario: "perico", password: "1234", tipo: "admin" }],
       listaPedidos: [{
         numPedido: 1, productos: [{
           producto: {
@@ -203,6 +257,7 @@ class App extends Component {
   }
   toggleModalCarrito() { this.setState({ isOpenCarrito: !this.state.isOpenCarrito }) }
   toggleModalPedidos() { this.setState({ isOpenPedidos: !this.state.isOpenPedidos }) }
+  toggleModalLogin() { this.setState({ isOpenLogin: !this.state.isOpenLogin }) }
 
   modificar(producto, cantidad) {
     let c = this.state.carrito
@@ -245,13 +300,32 @@ class App extends Component {
     }));
   };
 
+  loguear = (u, p) => {
+    let usuario = this.state.usuarios.find(e => e.usuario === u && e.password === p);
+    if (usuario) {
+      this.setState({ usuario: usuario, isOpenLogin: false, logueado: true });
+    } else {
+      alert("Usuario o contraseña incorrectos");
+    }
+  }
+
   render() {
     let numProd = 0;
     this.state.carrito.map(e => numProd += e.cantidad)
     return (
       <>
+        {this.state.logueado ? (
+          <Button color="success" onClick={() => this.setState({ logueado: false })}>Log Out</Button>
+        ) : (
+          <Button color="secondary" onClick={() => this.toggleModalLogin()}>Log In</Button>
+        )}{' '}
+
         <Button color="primary" onClick={() => this.toggleModalCarrito()}>Carrito ({numProd})</Button>{' '}
-        <Button color="success" onClick={() => this.toggleModalPedidos()}>Pedidos</Button>
+
+        {this.state.logueado && (
+          <Button color="secondary" onClick={() => this.toggleModalPedidos()}>Pedidos</Button>
+        )}
+
         <ShowProductos
           lista={this.state.listaProductos}
           modificar={(p, c) => this.modificar(p, c)}
@@ -267,6 +341,11 @@ class App extends Component {
           mostrar={this.state.isOpenPedidos}
           toggle={() => this.toggleModalPedidos()}
           pedidos={this.state.listaPedidos}
+        />
+        <VentanaLogin
+          mostrar={this.state.isOpenLogin}
+          toggle={() => this.toggleModalLogin()}
+          loguear={this.loguear}
         />
       </>
     );

@@ -4,22 +4,21 @@ import { Component } from 'react';
 import { Button } from 'reactstrap';
 
 class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
 
     }
   }
-  render(){
+  render() {
     return (
-    <div className="App">
-      <Button>
-        Dale
-      </Button>
-    </div>
-  );
+      <div className="App">
+        <Button>
+          Dale
+        </Button>
+      </div>
+    );
   }
-  
 }
 
 export default App;
