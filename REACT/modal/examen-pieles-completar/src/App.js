@@ -1,5 +1,5 @@
 import { Component, useState } from "react";
-import { Card, CardBody, CardText, CardTitle, Modal, ModalHeader, ModalBody, ModalFooter, Button, FormGroup, Label, Col, Input, CardSubtitle, ListGroup, ListGroupItem } from "reactstrap";
+import { Card, CardBody, CardText, CardTitle, Modal, ModalHeader, ModalBody, ModalFooter, Button, FormGroup, Label, Col, Input, CardSubtitle, ListGroup, ListGroupItem, Table } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 export const PIELES = [
   {
@@ -118,7 +118,7 @@ const VentanaModalCarrito = (props) => {
           </FormGroup>
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={() => props.guardarPedido()}>PAGAR</Button>
+          <Button color="primary" onClick={() => props.guardarPedido(formData.nombre, formData.direccion)}>PAGAR</Button>
           <Button color="secondary" onClick={() => props.toggle()}>CERRAR</Button>
         </ModalFooter>
       </Modal>
@@ -128,36 +128,34 @@ const VentanaModalCarrito = (props) => {
 
 const VentanaPedidos = (props) => {
   let listaPedidos = props.pedidos.map(e =>
-    <Card
-      style={{
-        width: '18rem'
-      }}
-    >
-      <CardBody>
-        <CardTitle tag="h5">
-          Número: {e.numPedido}
-        </CardTitle>
-        <CardSubtitle
-          className="mb-2 text-muted"
-          tag="h6"
-        >
-          Importe: {e.importe}€
-        </CardSubtitle>
-        <strong>Productos:</strong>
-        <ListGroup flush>
-          {e.productos.map(p =>
-            <ListGroupItem>{p.producto.nombre} - {p.cantidad}</ListGroupItem>)}
-        </ListGroup>
-        <strong>Dirección de envío:</strong>
-        <CardText>
-          {e.nombre}. {e.direccion}.
-        </CardText>
-      </CardBody>
-    </Card>
+    <Table responsive>
+      <thead>
+        <tr>
+          <th>Número</th><th>Importe</th><th>Productos</th><th>Dirección de envío</th>
+        </tr>
+      </thead>
+      <tBody>
+        <tr>
+          <th scope="row">{e.numPedido}</th>
+          <td>{e.importe}€</td>
+          <td>
+            <ListGroup flush>
+              {e.productos.map(p => <ListGroupItem>{p.producto.nombre} - {p.cantidad}</ListGroupItem>)}
+            </ListGroup>
+          </td>
+          <td>
+            <ListGroup flush>
+              <ListGroupItem><strong>Nombre:</strong> {e.nombre}.</ListGroupItem>
+              <ListGroupItem><strong>Dirección postal:</strong> {e.direccion}.</ListGroupItem>
+            </ListGroup>
+          </td>
+        </tr>
+      </tBody>
+    </Table>
   );
   return (
     <div>
-      <Modal isOpen={props.mostrar} toggle={props.toggle}>
+      <Modal fullscreen isOpen={props.mostrar} toggle={props.toggle}>
         <ModalHeader toggle={props.toggle}>TODOS LOS PEDIDOS</ModalHeader>
         <ModalBody>
           {listaPedidos}
@@ -216,8 +214,16 @@ class App extends Component {
     console.log(c)
   }
 
-  guardarPedido = () => {
+  actualizarFormulario = (campo, valor) => {
+    this.setState(prevState => ({
+      formData: { ...prevState.formData, [campo]: valor }
+    }));
+  };
+
+
+  guardarPedido = (n, d) => {
     let productosEnCarrito = this.state.carrito.filter(e => e.cantidad > 0);
+    let nuevaListaPedidos = this.state.listaPedidos;
 
     let nuevoPedido = {
       numPedido: this.state.listaPedidos.length + 1,
@@ -226,17 +232,18 @@ class App extends Component {
         cantidad: e.cantidad
       })),
       importe: productosEnCarrito.reduce((total, e) => total + e.precio * e.cantidad, 0),
-      nombre: "Cliente",  // Puedes mejorar esto capturando datos del formulario
-      direccion: "Dirección" // Igual que arriba
+      nombre: n,
+      direccion: d
     };
 
+    nuevaListaPedidos.push(nuevoPedido);
+
     this.setState(prevState => ({
-      listaPedidos: [...prevState.listaPedidos, nuevoPedido], // Agregar pedido
+      listaPedidos: nuevaListaPedidos,
       carrito: prevState.carrito.map(e => ({ ...e, cantidad: 0 })), // Vaciar carrito
       isOpenCarrito: false // Cerrar modal del carrito
     }));
   };
-
 
   render() {
     let numProd = 0;
