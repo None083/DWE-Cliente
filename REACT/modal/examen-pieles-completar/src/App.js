@@ -58,8 +58,7 @@ const VentanaModalCarrito = (props) => {
 
   const [formData, setFormData] = useState({
     nombre: "",
-    apellidos: "",
-    telefono: "",
+    apellidos: ""
   });
 
   const handleChange = (event) => {
