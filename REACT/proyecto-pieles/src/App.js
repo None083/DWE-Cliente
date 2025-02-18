@@ -2,7 +2,6 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Component } from 'react';
 import { Button, Container, Navbar, NavbarBrand, Nav, NavItem, NavLink, Collapse, NavbarToggler } from 'reactstrap';
-import { PIELES } from './pieles'; // Importamos el JSON
 
 class Header extends Component {
   constructor(props) {
@@ -10,7 +9,18 @@ class Header extends Component {
     this.state = {
       isOpen: false, // Estado del menú hamburguesa
       isCategoriesOpen: false, // Estado del menú de categorías
+      productos: [], // Estado para almacenar los productos
     };
+  }
+
+  componentDidMount() {
+    // Obtener los datos desde la URL proporcionada
+    fetch('/2daw/pieles.json')
+      .then((response) => response.json()) // Convertir la respuesta en JSON
+      .then((data) => {
+        this.setState({ productos: data.productos }); // Guardar productos en el estado
+      })
+      .catch((error) => console.error('Error al cargar los datos:', error));
   }
 
   // Función para abrir/cerrar el menú de hamburguesa
@@ -24,37 +34,44 @@ class Header extends Component {
   };
 
   render() {
-    // Extraemos las categorías únicas
-    const categorias = [...new Set(PIELES.productos.map(producto => producto.categoria))];
+    // Extraemos las categorías únicas del estado
+    const categorias = [...new Set(this.state.productos.map((producto) => producto.categoria.toUpperCase()))];
 
     return (
-      <Navbar color="dark" dark expand="md">
-        <NavbarBrand href="/">Mi App</NavbarBrand>
+      <Navbar style={{ backgroundColor: '#191000' }} dark expand="md">
+        <NavbarBrand href="/"><img src={process.env.PUBLIC_URL + '/images/logo2.png'} alt="Logo" style={{ height: '60px' }} onError={(e) => e.target.style.display = 'none'} /></NavbarBrand>
         <NavbarToggler onClick={this.toggleNavbar} />
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem className="mx-2">
-              <NavLink href="#">Inicio</NavLink>
+              <NavLink href="#" style={{ color: '#f2dcb8' }} onMouseOver={(e) => e.target.style.color = 'white'} onMouseOut={(e) => e.target.style.color = '#f2dcb8'}><strong>HOME</strong></NavLink>
             </NavItem>
             <NavItem className="mx-2">
-              <NavLink href="#">Acerca</NavLink>
+              <NavLink href="#" style={{ color: '#f2dcb8' }} onMouseOver={(e) => e.target.style.color = 'white'} onMouseOut={(e) => e.target.style.color = '#f2dcb8'}><strong>ABOUT</strong></NavLink>
             </NavItem>
 
-            {/* Botón "Categorías" */}
-            <NavItem className="mx-2">
-              <NavLink href="#" className="categories-button" onClick={this.toggleCategories}>
-                Categorías ▼
+            {/* Botón "Categorías" para dispositivos móviles */}
+            <NavItem className="mx-2 d-md-none">
+              <NavLink href="#" className="categories-button" onClick={this.toggleCategories} style={{ color: '#f2dcb8' }} onMouseOver={(e) => e.target.style.color = 'white'} onMouseOut={(e) => e.target.style.color = '#f2dcb8'}>
+                <strong>CATEGORIES ▼</strong>
               </NavLink>
               <Collapse isOpen={this.state.isCategoriesOpen} navbar>
                 <Nav className="ml-auto" navbar>
                   {categorias.map((categoria, index) => (
                     <NavItem key={index} className="mx-2">
-                      <NavLink href={`#${categoria}`}>{categoria}</NavLink>
+                      <NavLink href={`#${categoria}`} style={{ color: '#efe5d5', borderBottom: "1px solid #efe5d5" }} onMouseOver={(e) => e.target.style.color = 'white'} onMouseOut={(e) => e.target.style.color = '#efe5d5'}>{categoria}</NavLink>
                     </NavItem>
                   ))}
                 </Nav>
               </Collapse>
             </NavItem>
+
+            {/* Categorías para dispositivos de escritorio */}
+            {categorias.map((categoria, index) => (
+              <NavItem key={index} className="mx-2 d-none d-md-block">
+                <NavLink href={`#${categoria}`} style={{ color: '#efe5d5' }} onMouseOver={(e) => e.target.style.color = 'white'} onMouseOut={(e) => e.target.style.color = '#efe5d5'}>{categoria}</NavLink>
+              </NavItem>
+            ))}
           </Nav>
         </Collapse>
       </Navbar>
@@ -63,8 +80,8 @@ class Header extends Component {
 }
 
 const Footer = () => (
-  <footer className="bg-dark text-light text-center py-3 mt-5">
-    <p>&copy; 2025 Mi Aplicación. Todos los derechos reservados.</p>
+  <footer className="text-center py-3 mt-5" style={{ backgroundColor: '#191000', color: '#EDD2A7' }}>
+    <p>&copy; 2025 Leather for Artisans. All rights reserved.</p>
   </footer>
 );
 
@@ -76,8 +93,8 @@ class App extends Component {
 
         {/* Contenido principal */}
         <Container className="mt-4 text-center">
-          <h1>Bienvenido a mi aplicación</h1>
-          <Button color="primary">Dale</Button>
+          <h1>Wellcome to Leather for Artisans</h1>
+          <Button color="secondary">Dale</Button>
         </Container>
 
         <Footer />
