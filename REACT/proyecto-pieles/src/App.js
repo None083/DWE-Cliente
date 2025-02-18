@@ -8,13 +8,19 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isOpen: false, // Estado para el menú desplegable de hamburguesa
+      isOpen: false, // Estado del menú hamburguesa
+      isCategoriesOpen: false, // Estado del menú de categorías
     };
   }
 
-  // Función para manejar el toggle (abrir/cerrar) del menú de hamburguesa
+  // Función para abrir/cerrar el menú de hamburguesa
   toggleNavbar = () => {
     this.setState({ isOpen: !this.state.isOpen });
+  };
+
+  // Función para abrir/cerrar el menú de categorías
+  toggleCategories = () => {
+    this.setState({ isCategoriesOpen: !this.state.isCategoriesOpen });
   };
 
   render() {
@@ -24,7 +30,6 @@ class Header extends Component {
     return (
       <Navbar color="dark" dark expand="md">
         <NavbarBrand href="/">Mi App</NavbarBrand>
-        {/* Icono de hamburguesa que siempre estará visible */}
         <NavbarToggler onClick={this.toggleNavbar} />
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="ml-auto" navbar>
@@ -35,19 +40,20 @@ class Header extends Component {
               <NavLink href="#">Acerca</NavLink>
             </NavItem>
 
-            {/* Menú de categorías se despliega al hacer clic en el icono de hamburguesa */}
+            {/* Botón "Categorías" */}
             <NavItem className="mx-2">
-              <NavLink href="#" id="navbarDropdown" role="button">
-                <div className={`categories-menu ${this.state.isOpen ? 'open' : ''}`}>
-                  <ul>
-                    {categorias.map((categoria, index) => (
-                      <li key={index}>
-                        <NavLink href={`#${categoria}`}>{categoria}</NavLink>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              <NavLink href="#" className="categories-button" onClick={this.toggleCategories}>
+                Categorías ▼
               </NavLink>
+              <Collapse isOpen={this.state.isCategoriesOpen} navbar>
+                <Nav className="ml-auto" navbar>
+                  {categorias.map((categoria, index) => (
+                    <NavItem key={index} className="mx-2">
+                      <NavLink href={`#${categoria}`}>{categoria}</NavLink>
+                    </NavItem>
+                  ))}
+                </Nav>
+              </Collapse>
             </NavItem>
           </Nav>
         </Collapse>
